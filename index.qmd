@@ -1,0 +1,17 @@
+---
+title: "Leia Kawamura"
+image: "files/0151.jpg"
+about:
+  template: jolla
+  links:
+    - icon: envelope
+      href: mailto:lekawamura@ucsd.edu
+    - icon: linkedin
+      href: https://www.linkedin.com/in/princessleiak
+---
+
+Welcome to my website!
+
+This is a Quarto website.
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.

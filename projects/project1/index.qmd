@@ -1,0 +1,32 @@
+---
+title: "Customer Analysis Project"
+author: Leia Kawamura
+date: 02/2026
+---
+
+# Header
+
+This project focused on optimizing follow-up marketing campaign targeting using customer analytics and machine learning. Using data from 75,000 customers, I built and compared four classification models to identify the most profitable group of customers to contact. Rather than selecting a model based only on predictive accuracy, I evaluated each model based on projected business value and selected a profit-driven contact list of 22,500 customers to maximize expected revenue.
+
+
+## Architecture & Tools
+
+	•	Programming Language: Python
+	•	Libraries & Frameworks: scikit-learn, pandas, numpy
+	•	Modeling Techniques: Classification models (e.g., Logistic Regression, Neural Networks, Decision Trees, etc.)
+	•	Model Optimization: Cross-validation, hyperparameter tuning (hidden layer size, regularization)
+	•	Evaluation Methods: Confusion matrix, precision/recall analysis, response calibration
+	•	Business Metrics: Profit modeling, ROME (Return on Marketing Effort), break-even probability thresholding
+	•	Concepts Applied: Customer segmentation, predictive modeling, profit-driven decision making, marketing analytics
+
+
+## Sub-Header
+
+Here is a summary of the work:
+
+- Built and compared 4 machine learning models on a dataset of 75,000 customers to improve follow-up marketing campaign targeting.
+- Applied cross-validation and hyperparameter tuning, including hidden layer size and regularization, to improve model performance across all classifiers.
+- Used confusion-matrix-based response calibration to better align model predictions with expected real-world customer response behavior.
+- Replaced the standard classification threshold with a break-even probability model adjusted for expected response drop-off.
+- Calculated projected profit and ROME across all models to identify the most economically effective targeting strategy.
+- Produced a final recommendation list of 22,500 customers to maximize projected campaign revenue.

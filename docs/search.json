@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Leia Kawamura",
+    "section": "",
+    "text": "Welcome to my website!\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "resume.html",
+    "href": "resume.html",
+    "title": "My Resume",
+    "section": "",
+    "text": "Download PDF file."
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "My Projects",
+    "section": "",
+    "text": "Customer Analysis Project\n\n\n\n\n\n\nLeia Kawamura\n\n\nInvalid Date\n\n\n\n\n\n\n\n\n\n\n\nOptimizing Wage Outcomes with Snowflake & Python\n\n\n\n\n\n\nLeia Kawamura\n\n\nInvalid Date\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "projects/project1/index.html",
+    "href": "projects/project1/index.html",
+    "title": "Customer Analysis Project",
+    "section": "",
+    "text": "This project focused on optimizing follow-up marketing campaign targeting using customer analytics and machine learning. Using data from 75,000 customers, I built and compared four classification models to identify the most profitable group of customers to contact. Rather than selecting a model based only on predictive accuracy, I evaluated each model based on projected business value and selected a profit-driven contact list of 22,500 customers to maximize expected revenue.\n\n\n•   Programming Language: Python\n•   Libraries & Frameworks: scikit-learn, pandas, numpy\n•   Modeling Techniques: Classification models (e.g., Logistic Regression, Neural Networks, Decision Trees, etc.)\n•   Model Optimization: Cross-validation, hyperparameter tuning (hidden layer size, regularization)\n•   Evaluation Methods: Confusion matrix, precision/recall analysis, response calibration\n•   Business Metrics: Profit modeling, ROME (Return on Marketing Effort), break-even probability thresholding\n•   Concepts Applied: Customer segmentation, predictive modeling, profit-driven decision making, marketing analytics\n\n\n\nHere is a summary of the work:\n\nBuilt and compared 4 machine learning models on a dataset of 75,000 customers to improve follow-up marketing campaign targeting.\nApplied cross-validation and hyperparameter tuning, including hidden layer size and regularization, to improve model performance across all classifiers.\nUsed confusion-matrix-based response calibration to better align model predictions with expected real-world customer response behavior.\nReplaced the standard classification threshold with a break-even probability model adjusted for expected response drop-off.\nCalculated projected profit and ROME across all models to identify the most economically effective targeting strategy.\nProduced a final recommendation list of 22,500 customers to maximize projected campaign revenue."
+  },
+  {
+    "objectID": "projects/project1/index.html#sub-header",
+    "href": "projects/project1/index.html#sub-header",
+    "title": "Customer Analysis Project",
+    "section": "",
+    "text": "Here is a summary of the work:\n\nBuilt and compared 4 machine learning models on a dataset of 75,000 customers to improve follow-up marketing campaign targeting.\nApplied cross-validation and hyperparameter tuning, including hidden layer size and regularization, to improve model performance across all classifiers.\nUsed confusion-matrix-based response calibration to better align model predictions with expected real-world customer response behavior.\nReplaced the standard classification threshold with a break-even probability model adjusted for expected response drop-off.\nCalculated projected profit and ROME across all models to identify the most economically effective targeting strategy.\nProduced a final recommendation list of 22,500 customers to maximize projected campaign revenue."
+  },
+  {
+    "objectID": "projects/project2/index.html",
+    "href": "projects/project2/index.html",
+    "title": "Optimizing Wage Outcomes with Snowflake & Python",
+    "section": "",
+    "text": "Project Overview\nThis project demonstrates the design and implementation of a scalable, cloud-based data pipeline using Snowflake and Python to analyze wage trends across industries and geographic regions. The objective was to identify high-opportunity industry-location combinations and support data-driven decision-making.\nBy leveraging modern data engineering and analytics techniques, the project delivered actionable insights that contributed to a 10% improvement in wage outcomes.\n\n\n\nArchitecture & Tools\n\nCloud Data Warehouse: Snowflake\nProgramming Language: Python\nData Access: Snowflake Connector for Python\nQuery Language: SQL\nConcepts Applied: ETL pipelines, Location Quotient (LQ), data modeling, exploratory analysis\n\n\n\n\nData Pipeline Design\nAn end-to-end pipeline was engineered to:\n\nEstablish a secure connection to Snowflake\nProvision a Virtual Warehouse for compute scalability\nCreate and manage a structured database schema\nIngest and transform wage-related datasets\nEnable efficient querying for downstream analysis\n\nThis architecture ensures high performance, scalability, and cost-efficient compute usage.\n\n\n\nAnalytical Approach\nThe analysis focused on identifying wage disparities using Location Quotient (LQ) metrics. This method compares the concentration of wages in a specific industry and region against a broader benchmark.\nKey steps included: - Aggregating wage data across industries and locations - Calculating LQ to identify high-growth or underrepresented sectors - Ranking industry-location pairs based on wage potential\n\n\n\nSample Query\n#| message: false\nlibrary(DBI) library(odbc)\ncon &lt;- dbConnect(odbc::odbc(), Driver = “SnowflakeDSIIDriver”, Server = “your_account.snowflakecomputing.com”, UID = “your_username”, PWD = “your_password”, Warehouse = “COMPUTE_WH”, Database = “WAGE_DB”, Schema = “PUBLIC”)\nquery &lt;- ” SELECT industry, location, AVG(wage) AS avg_wage FROM wage_data GROUP BY industry, location ORDER BY avg_wage DESC LIMIT 10; ”\nresults &lt;- dbGetQuery(con, query) results"
+  },
+  {
+    "objectID": "projects/project1/index.html#architecture-tools",
+    "href": "projects/project1/index.html#architecture-tools",
+    "title": "Customer Analysis Project",
+    "section": "",
+    "text": "•   Programming Language: Python\n•   Libraries & Frameworks: scikit-learn, pandas, numpy\n•   Modeling Techniques: Classification models (e.g., Logistic Regression, Neural Networks, Decision Trees, etc.)\n•   Model Optimization: Cross-validation, hyperparameter tuning (hidden layer size, regularization)\n•   Evaluation Methods: Confusion matrix, precision/recall analysis, response calibration\n•   Business Metrics: Profit modeling, ROME (Return on Marketing Effort), break-even probability thresholding\n•   Concepts Applied: Customer segmentation, predictive modeling, profit-driven decision making, marketing analytics"
+  }
+]
