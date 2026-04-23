@@ -8,10 +8,16 @@ about:
       href: mailto:lekawamura@ucsd.edu
     - icon: linkedin
       href: https://www.linkedin.com/in/princessleiak
+    - icon: github
+      href: https://github.com/leiakawamura
 ---
 
 Welcome to my website!
 
-This is a Quarto website.
+I'm Leia, a MS in Business Analytics student at UC San Diego's Rady School of Management.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+I'm passionate about turning complex data into actionable insights that drive smarter business decisions. My work sits at the intersection of analytics, strategy, and technology, spanning everything from statistical modeling and machine learning to data visualization and business intelligence.
+On this site, you'll find my projects, resume, and a look at the problems I enjoy solving.
+
+I am actively seeking internship and full-time opportunities.
+Feel free to reach out — I'd love to connect!
