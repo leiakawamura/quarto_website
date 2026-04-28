@@ -19,5 +19,11 @@
   },
   "blog.qmd": {
     "blog.html": "472d0ee6"
+  },
+  "blog/min_wage/index.qmd": {
+    "index.html": "5449beec"
+  },
+  "blog/index.qmd": {
+    "index.html": "12470a48"
   }
 }
