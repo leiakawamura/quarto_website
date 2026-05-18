@@ -1,0 +1,76 @@
+---
+title: "Optimizing Wage Outcomes with Snowflake & Python"
+author: Leia Kawamura
+date: 07/2025
+---
+
+# Project Overview
+
+This project demonstrates the design and implementation of a scalable, cloud-based data pipeline using **Snowflake** and **Python** to analyze wage trends across industries and geographic regions. The objective was to identify high-opportunity industry-location combinations and support data-driven decision-making.
+
+By leveraging modern data engineering and analytics techniques, the project delivered actionable insights that contributed to a **10% improvement in wage outcomes**.
+
+---
+
+# Architecture & Tools
+
+- **Cloud Data Warehouse:** Snowflake
+- **Programming Language:** Python
+- **Data Access:** Snowflake Connector for Python
+- **Query Language:** SQL
+- **Concepts Applied:** ETL pipelines, Location Quotient (LQ), data modeling, exploratory analysis
+
+---
+
+# Data Pipeline Design
+
+An end-to-end pipeline was engineered to:
+
+1. Establish a secure connection to Snowflake
+2. Provision a **Virtual Warehouse** for compute scalability
+3. Create and manage a structured **database schema**
+4. Ingest and transform wage-related datasets
+5. Enable efficient querying for downstream analysis
+
+This architecture ensures **high performance, scalability, and cost-efficient compute usage**.
+
+---
+
+# Analytical Approach
+
+The analysis focused on identifying wage disparities using **Location Quotient (LQ)** metrics. This method compares the concentration of wages in a specific industry and region against a broader benchmark.
+
+Key steps included:
+- Aggregating wage data across industries and locations
+- Calculating LQ to identify high-growth or underrepresented sectors
+- Ranking industry-location pairs based on wage potential
+
+---
+
+# Sample Query
+
+```{r}
+#| message: false
+
+library(DBI)
+library(odbc)
+
+con <- dbConnect(odbc::odbc(),
+                 Driver = "SnowflakeDSIIDriver",
+                 Server = "your_account.snowflakecomputing.com",
+                 UID = "your_username",
+                 PWD = "your_password",
+                 Warehouse = "COMPUTE_WH",
+                 Database = "WAGE_DB",
+                 Schema = "PUBLIC")
+
+query <- "
+SELECT industry, location, AVG(wage) AS avg_wage
+FROM wage_data
+GROUP BY industry, location
+ORDER BY avg_wage DESC
+LIMIT 10;
+"
+
+results <- dbGetQuery(con, query)
+results

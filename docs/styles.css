@@ -1,1 +1,243 @@
 /* css styles */
+
+:root {
+  --coffee-dark: #5c3a21;
+  --coffee: #8b5e3c;
+  --latte: #efe2d3;
+  --cream: #fff8f0;
+  --mocha-text: #2a1b12;
+  --soft-text: #6f5a4a;
+  --border: #e3d2c0;
+}
+
+body {
+  color: var(--mocha-text);
+  background: linear-gradient(180deg, var(--cream) 0%, #ffffff 52%);
+}
+
+/* Navbar */
+.navbar,
+.navbar-dark,
+.navbar-light {
+  background-color: rgba(255, 248, 240, 0.96) !important;
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-title,
+.navbar-nav .nav-link {
+  color: var(--coffee-dark) !important;
+  font-weight: 650;
+}
+
+.navbar-title:hover,
+.navbar-nav .nav-link:hover {
+  color: var(--coffee) !important;
+}
+
+/* Main layout */
+main {
+  color: var(--mocha-text);
+}
+
+/* Jolla about section */
+.quarto-about-jolla {
+  margin-top: 2rem;
+}
+
+/* Homepage title only */
+.quarto-about-jolla h1 {
+  font-family: "Times New Roman", Times, serif;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--coffee-dark);
+  margin-bottom: 1.2rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Normal page and blog titles */
+main h1:not(.title) {
+  font-family: inherit;
+  font-size: 2.2rem;
+  line-height: 1.2;
+  letter-spacing: normal;
+  white-space: normal;
+  text-align: left;
+}
+
+/* Section headings */
+main h2, {
+  font-family: "Times New Roman", Times, serif;
+  font-size: clamp(1.4rem, 3vw, 2.5rem);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--coffee-dark);
+  text-align: center;
+  margin-top: 3rem;
+}
+
+/* Hide Quarto automatic about icons */
+.quarto-about-jolla .about-links,
+.about-links {
+  display: none !important;
+}
+
+/* Introduction card */
+.intro-card {
+  background: rgba(255, 248, 240, 0.86);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 1.6rem 1.75rem;
+  box-shadow: 0 14px 34px rgba(92, 58, 33, 0.08);
+  color: var(--soft-text);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  max-width: 820px;
+  margin: 1rem auto 0 auto;
+  text-align: center;
+}
+
+.intro-card p:first-child,
+.intro-card > p:first-of-type {
+  color: var(--mocha-text);
+  font-size: 1.18rem;
+  font-weight: 650;
+}
+
+.intro-card strong {
+  color: var(--coffee-dark);
+}
+
+/* Contact icons between intro and buttons */
+.contact-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.1rem;
+  margin-top: 1.8rem;
+  margin-bottom: 1.4rem;
+}
+
+.contact-icon {
+  width: 66px;
+  height: 66px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--latte);
+  color: var(--coffee-dark) !important;
+  border: 2px solid var(--coffee-dark);
+  box-shadow: 0 12px 28px rgba(92, 58, 33, 0.12);
+  text-decoration: none !important;
+  font-size: 1.45rem;
+}
+
+.contact-icon i {
+  color: var(--coffee-dark) !important;
+}
+
+.contact-icon:hover {
+  background: #e5cfba;
+  color: var(--coffee-dark) !important;
+  transform: translateY(-3px);
+  text-decoration: none !important;
+}
+
+/* Buttons */
+.home-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 0;
+}
+
+.button {
+  padding: 0.72rem 1.35rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.92rem;
+  display: inline-block;
+}
+
+.primary-button {
+  background: var(--coffee-dark);
+  color: white !important;
+  border: 1px solid var(--coffee-dark);
+}
+
+.secondary-button {
+  color: var(--coffee-dark) !important;
+  border: 1px solid var(--coffee-dark);
+  background: transparent;
+}
+
+.primary-button:hover,
+.secondary-button:hover {
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+/* Skill chips */
+.skill-chips {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.chip {
+  background: #ffffff;
+  color: var(--coffee-dark);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.55rem 0.95rem;
+  font-size: 0.92rem;
+  font-weight: 650;
+}
+
+/* Search icon */
+.aa-SubmitIcon {
+  color: var(--coffee-dark);
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  .quarto-about-jolla h1,
+  main h1 {
+    white-space: normal;
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .intro-card {
+    padding: 1.3rem 1.4rem;
+    text-align: left;
+  }
+
+  .contact-icons {
+    gap: 0.75rem;
+  }
+
+  .contact-icon {
+    width: 56px;
+    height: 56px;
+    font-size: 1.2rem;
+  }
+
+  .home-buttons {
+    justify-content: flex-start;
+  }
+
+  .skill-chips {
+    justify-content: flex-start;
+  }
+
+  main h2,
+  h2 {
+    text-align: left;
+  }
+}

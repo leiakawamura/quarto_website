@@ -2,6 +2,12 @@
   "listingMap": {
     "projects.qmd": [
       "projects"
+    ],
+    "projects_jp.qmd": [
+      "projects"
+    ],
+    "blog.qmd": [
+      "posts"
     ]
   }
 }

@@ -19,5 +19,26 @@
   },
   "blog.qmd": {
     "blog.html": "472d0ee6"
+  },
+  "projects_jp.qmd": {
+    "projects_jp.html": "10d4b3dc"
+  },
+  "projects_jp/project1/index.qmd": {
+    "index.html": "af7ae511"
+  },
+  "projects_jp/project2/index.qmd": {
+    "index.html": "c9c8d6ad"
+  },
+  "index_jp.qmd": {
+    "index_jp.html": "06c25bad"
+  },
+  "resume_jp.qmd": {
+    "resume_jp.html": "ca5dd82f"
+  },
+  "posts/hw3_questions.qmd": {
+    "hw3_questions.html": "af996a8a"
+  },
+  "posts/card-krueger.qmd": {
+    "card-krueger.html": "af4f8198"
   }
 }

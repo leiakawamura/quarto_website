@@ -1,0 +1,5 @@
+---
+title: "履歴書"
+---
+
+{{< pdf files/履歴書.pdf width=100% height=800 >}}

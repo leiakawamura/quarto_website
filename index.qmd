@@ -1,23 +1,64 @@
 ---
-title: "Leia Kawamura"
+title: "Hello, my name is Leia Kawamura"
 image: "files/0151.jpg"
 about:
   template: jolla
-  links:
-    - icon: envelope
-      href: mailto:lekawamura@ucsd.edu
-    - icon: linkedin
-      href: https://www.linkedin.com/in/princessleiak
-    - icon: github
-      href: https://github.com/leiakawamura
 ---
 
-Welcome to my website!
+# A little about me
 
-I'm Leia, a MS in Business Analytics student at UC San Diego's Rady School of Management.
+::: {.intro-card}
+I love people, and I am learning how data can help us understand people better.
 
-I'm passionate about turning complex data into actionable insights that drive smarter business decisions. My work sits at the intersection of analytics, strategy, and technology, spanning everything from statistical modeling and machine learning to data visualization and business intelligence.
-On this site, you'll find my projects, resume, and a look at the problems I enjoy solving.
+I hope to bring people and data together to support smarter business decisions, especially in marketing, customer experience, and future coffee industry opportunities.
 
-I am actively seeking internship and full-time opportunities.
-Feel free to reach out — I'd love to connect!
+**I am actively seeking internship and full-time opportunities.
+Feel free to reach out — I’d love to connect!**
+:::
+
+::: {.contact-icons}
+<a href="mailto:Reia.Kawamura@rady.ucsd.edu" class="contact-icon" target="_blank" rel="noopener noreferrer" aria-label="Email">
+  <i class="bi bi-envelope"></i>
+</a>
+
+<a href="https://www.linkedin.com/in/princessleiak" class="contact-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+  <i class="bi bi-linkedin"></i>
+</a>
+
+<a href="https://github.com/leiakawamura" class="contact-icon" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+  <i class="bi bi-github"></i>
+</a>
+:::
+
+::: {.home-buttons}
+[View My Projects](projects.qmd){.button .primary-button}
+[View My Resume](resume.qmd){.button .secondary-button}
+:::
+
+## My interest in the field
+
+::: {.skill-chips}
+::: {.chip}
+Marketing Analytics
+:::
+
+::: {.chip}
+Customer Insights
+:::
+
+::: {.chip}
+Business Strategy
+:::
+
+::: {.chip}
+Data Storytelling
+:::
+
+::: {.chip}
+Coffee Industry
+:::
+
+::: {.chip}
+Education
+:::
+:::

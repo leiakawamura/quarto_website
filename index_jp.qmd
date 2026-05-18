@@ -1,0 +1,64 @@
+---
+title: "河村玲采"
+image: "files/0151.jpg"
+about:
+  template: jolla
+---
+
+# かわむられいあ
+
+::: {.intro-card}
+私は人との関わりが大好きで、現在はそのレベルアップとしてデータを活用して人々をより深く理解する方法を学んでいます。
+
+特にマーケティング、カスタマーエクスペリエンス、そしてコーヒー業界といった分野において、人とデータを結びつけ、より賢明なビジネス判断を支援していきたいと考えています。
+
+**現在、インターンシップや正社員としての採用機会を積極的に探しています。
+お気軽にご連絡ください。ぜひお話しできるのを楽しみにしています！**
+:::
+
+::: {.contact-icons}
+<a href="mailto:Reia.Kawamura@rady.ucsd.edu" class="contact-icon" target="_blank" rel="noopener noreferrer" aria-label="Email">
+  <i class="bi bi-envelope"></i>
+</a>
+
+<a href="https://www.linkedin.com/in/princessleiak" class="contact-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+  <i class="bi bi-linkedin"></i>
+</a>
+
+<a href="https://github.com/leiakawamura" class="contact-icon" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+  <i class="bi bi-github"></i>
+</a>
+:::
+
+::: {.home-buttons}
+[プロジェクト](projects.qmd){.button .primary-button}
+[履歴書](resume.qmd){.button .secondary-button}
+:::
+
+## My interest in the field
+
+::: {.skill-chips}
+::: {.chip}
+マーケティング分析
+:::
+
+::: {.chip}
+顧客理解
+:::
+
+::: {.chip}
+ビジネス戦略
+:::
+
+::: {.chip}
+データによるビジネス判断
+:::
+
+::: {.chip}
+コーヒー業界
+:::
+
+::: {.chip}
+教育業界
+:::
+:::
