@@ -1,47 +1,44 @@
 {
   "resume.qmd": {
-    "resume.html": "09fd8f11"
+    "resume.html": "060b1d63"
   },
   "posts/card-krueger.qmd": {
-    "card-krueger.html": "0f316e14"
+    "card-krueger.html": "81f312da"
   },
   "posts/hw3_questions.qmd": {
-    "hw3_questions.html": "6a994174"
+    "hw3_questions.html": "1d97454f"
   },
   "projects_jp.qmd": {
-    "projects_jp.html": "b4f80975"
+    "projects_jp.html": "634c9eda"
   },
   "projects/project1/index.qmd": {
-    "index.html": "617c6f06"
+    "index.html": "34fa4a74"
   },
   "projects/project2/index.qmd": {
-    "index.html": "f0d1de0b"
+    "index.html": "7ac270bb"
   },
   "projects.qmd": {
-    "projects.html": "c15b31df"
+    "projects.html": "3086285c"
   },
   "index.qmd": {
-    "index.html": "e18bf138"
-  },
-  "blog/min_wage/index.qmd": {
-    "index.html": "d147c2f6"
+    "index.html": "860602d9"
   },
   "blog/index.qmd": {
-    "index.html": "032670df"
+    "index.html": "b2a3927f"
   },
   "about.qmd": {
-    "about.html": "7e49b5f7"
+    "about.html": "dd0d33cb"
   },
   "projects_jp/project1/index.qmd": {
-    "index.html": "6d01784b"
+    "index.html": "3df93c62"
   },
-  "projects_jp/project2/index.qmd": {
-    "index.html": "6c2d90d8"
+  "blog.qmd": {
+    "blog.html": "648af37e"
   },
   "index_jp.qmd": {
-    "index_jp.html": "6fad534a"
+    "index_jp.html": "edd45798"
   },
   "resume_jp.qmd": {
-    "resume_jp.html": "518fc1ff"
+    "resume_jp.html": "f7f0ce62"
   }
 }

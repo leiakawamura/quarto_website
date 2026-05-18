@@ -1,0 +1,16 @@
+[
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/hw3_questions.html",
+      "/posts/card-krueger.html"
+    ]
+  },
+  {
+    "listing": "/projects_jp.html",
+    "items": [
+      "/projects/project1/index.html",
+      "/projects/project2/index.html"
+    ]
+  }
+]
