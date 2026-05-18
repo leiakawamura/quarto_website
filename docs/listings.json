@@ -12,5 +12,9 @@
       "/projects/project1/index.html",
       "/projects/project2/index.html"
     ]
+  },
+  {
+    "listing": "/blog/index.html",
+    "items": []
   }
 ]
