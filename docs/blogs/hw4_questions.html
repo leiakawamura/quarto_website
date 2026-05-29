@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.13">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Leia Kawamura">
+<meta name="dcterms.date" content="2026-05-29">
+
+<title>MaxDiff Analysis of MSBA Class Preferences – Leia Kawamura</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em;
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ac077c1e730dfeb5e42400639d17284e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-be2ce90f312f84ef36cfe5d7aed54ac3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": ["f", "/", "s"],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = { typesetMath };
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Leia Kawamura</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">
+<span class="menu-text">Home</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../resume.html">
+<span class="menu-text">Resume</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../projects.html">
+<span class="menu-text">Projects</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../blog.html">
+<span class="menu-text">Blogs</span></a>
+  </li>
+</ul>
+          </div>
+            <div class="quarto-navbar-tools"></div>
+      </div>
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data">The Data</a></li>
+  <li><a href="#counts-analysis" id="toc-counts-analysis" class="nav-link" data-scroll-target="#counts-analysis">Counts Analysis</a></li>
+  <li><a href="#from-maxdiff-data-to-mnl-choices" id="toc-from-maxdiff-data-to-mnl-choices" class="nav-link" data-scroll-target="#from-maxdiff-data-to-mnl-choices">From MaxDiff Data to MNL Choices</a></li>
+  <li><a href="#mnl-via-maximum-likelihood" id="toc-mnl-via-maximum-likelihood" class="nav-link" data-scroll-target="#mnl-via-maximum-likelihood">MNL via Maximum Likelihood</a></li>
+  <li><a href="#mnl-via-bayesian-estimation" id="toc-mnl-via-bayesian-estimation" class="nav-link" data-scroll-target="#mnl-via-bayesian-estimation">MNL via Bayesian Estimation</a></li>
+  <li><a href="#comparing-the-three-methods" id="toc-comparing-the-three-methods" class="nav-link" data-scroll-target="#comparing-the-three-methods">Comparing the Three Methods</a></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">MaxDiff Analysis of MSBA Class Preferences</h1>
+<p class="subtitle lead">Counts, MLE, and Bayesian estimation of the MNL model</p>
+</div>
+
+<div class="quarto-title-meta">
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Leia Kawamura </p>
+          </div>
+  </div>
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 29, 2026</p>
+    </div>
+  </div>
+</div>
+</header>
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>MaxDiff</strong> (Best-Worst Scaling) is a method for measuring relative preferences by asking respondents to select the most preferred and least preferred items from a small set of options. This method is effective because, while assigning consistent ratings on a 1–10 scale is prone to scale-use bias, people are better at making trade-offs.</p>
+<p>In this study, the items under consideration are the 10 core courses in the UCSD Rady School of Management MSBA program. To estimate students' course preferences, we employ three methods: a simple "best-worst difference" aggregate analysis, a multinomial logit model using maximum likelihood estimation, and a Bayesian MNL model using the Metropolis-Hastings algorithm. While these methods generally agree on the ranking of courses, differences are expected to emerge in how they measure the strength of preferences and uncertainty.</p>
+</div>
+</div>
+</section>
+
+
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data">The Data</h2>
+<p>In this section, we will import the <strong>MaxDiff</strong> survey data and item label files. The main dataset contains one row for each item presented to respondents within a task. Each row includes the respondent ID, task number, item position, and item number, as well as whether the item was selected as "Best," "Worst," or "Neither."</p>
+<p>The other file, the <strong>item-label</strong> file, is used to map the numeric item IDs to the corresponding MSBA course names.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>choices <span class="op">=</span> pd.read_csv(<span class="st">"maxdiff_design_and_choices.csv"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> pd.read_csv(<span class="st">"maxdiff_item_labels.csv"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> choices[<span class="st">"Record ID"</span>].nunique()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>tasks_per_respondent <span class="op">=</span> choices.groupby(<span class="st">"Record ID"</span>)[<span class="st">"Task"</span>].nunique()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>items_per_task <span class="op">=</span> choices.groupby([<span class="st">"Record ID"</span>, <span class="st">"Task"</span>]).size()</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> labels[<span class="st">"Item #"</span>].nunique()</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"N respondents: </span><span class="sc">{N}</span><span class="ss">"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"T tasks per respondent: </span><span class="sc">{tasks_per_respondent.unique()}</span><span class="ss">"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total study items: </span><span class="sc">{K}</span><span class="ss">"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>N respondents: 85
+T tasks per respondent: [15]
+J items per task: (4 items shown per task)
+Total study items: 10</code></pre>
+</div>
+</div>
+<p>The dataset contains 85 respondents, with 15 tasks per respondent. The item-label file contains 10 total study items, corresponding to the 10 core MSBA classes.</p>
+<p>The sanity check verifies whether each task has exactly one best choice, one worst choice, and two neutral options. But some tasks do not follow the expected four-row MaxDiff structure, so this check flags those cases before modeling.</p>
+<p>The 10 labeled items are shown a roughly equal number of times, ranging from 323 to 340 exposures. This suggests the MaxDiff design is reasonably balanced across classes.</p>
+</section>
+
+
+<section id="counts-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="counts-analysis">Counts Analysis</h2>
+<p>The counts analysis provides a simple first look at class preferences without using a statistical model. For each class, I calculate how often it was selected as the most-preferred option and how often it was selected as the least-preferred option, out of the total number of times it was shown. The counts score is defined as following:</p>
+<p>\[
+\text{score}_j \;=\; \%\text{best}_j \;-\; \%\text{worst}_j
+\]</p>
+<p>A score closer to +1 means the class was frequently selected as best when shown. On the other hand, a score closer to -1 means it was frequently selected as worst. A score near 0 suggests the class is either middle-of-the-pack or receives mixed reactions from students.</p>
+<p>The counts analysis shows that <strong>MGTA 495 Marketing Analytics</strong> is the most preferred class by a large margin. Its score is much higher than the others, meaning it was selected as "best" far more often than it was selected as "worst" when shown. One possible explanation is that students especially enjoy Professor Dan's class.</p>
+<p>The next most preferred classes are <strong>MGTA 453 Business Analytics</strong>, <strong>MGTA 455 Customer Analytics</strong>, <strong>MGTA 452 Large Data</strong>, <strong>MGTA 454 Capstone Project</strong>, and <strong>MGTA 464 SQL</strong>, all of which have positive scores. This suggests that these classes were generally viewed favorably.</p>
+<p>At the lower end, we observed <strong>MGTA 444 Analytics Consulting</strong>, <strong>MGTA 451 Marketing/Finance/Operations</strong> and <strong>MGTA 403 AI Math, Programming, &amp; Analytics</strong>. Finally, <strong>MGTA 457 Business Intelligence Systems</strong> is close to zero, suggesting a more neutral or middle-of-the-pack preference.</p>
+</section>
+
+
+<section id="from-maxdiff-data-to-mnl-choices" class="level2">
+<h2 class="anchored" data-anchor-id="from-maxdiff-data-to-mnl-choices">From MaxDiff Data to MNL Choices</h2>
+<p>Before fitting the multinomial logit model, we need to convert the MaxDiff responses into choice observations. In the MaxDiff survey, each task shows a respondent a small set of classes, and the respondent chooses one class as the most preferred and one class as the least preferred. The MNL framework models each choice as a probabilistic selection from the available alternatives.</p>
+<p>The MNL model assigns each item \(j\) a utility coefficient \(\beta_j\). If a task shows items \(\{a, b, c, d\}\), then the probability that item \(b\) is selected as the best item is:</p>
+<p>\[
+P(\text{best} = b) \;=\; \frac{\exp(\beta_b)}{\exp(\beta_a) + \exp(\beta_b) + \exp(\beta_c) + \exp(\beta_d)}
+\]</p>
+<p>After the best item is selected, the worst item is chosen from the remaining three items. Since the worst choice represents the least preferred item, the utilities are flipped. For example, if item \(b\) was selected as best, then the probability that item \(c\) is selected as worst is:</p>
+<p>\[
+P(\text{worst} = c \mid \text{best} = b) \;=\; \frac{\exp(-\beta_c)}{\exp(-\beta_a) + \exp(-\beta_c) + \exp(-\beta_d)}
+\]</p>
+<p>Therefore, each MaxDiff task contributes two MNL-style choice observations: one for the best choice from the full set of four items, and one for the worst choice from the remaining three items.</p>
+<p>One important issue is <strong>identifiability</strong>. The soft-max probabilities do not change if the same constant is added to every utility coefficient. Since there are 10 classes, only \(J - 1 = 9\) coefficients can be freely estimated. I normalize the model by setting \(\beta_1 = 0\) and estimating the remaining coefficients, \(\beta_2, \ldots, \beta_{10}\).</p>
+<p>After filtering to valid four-item tasks with both a best and worst response, the resulting task-level dataset is ready to be used in the MNL likelihood function.</p>
+</section>
+
+
+<section id="mnl-via-maximum-likelihood" class="level2">
+<h2 class="anchored" data-anchor-id="mnl-via-maximum-likelihood">MNL via Maximum Likelihood</h2>
+<p>The counts analysis gives a useful descriptive ranking, but it does not estimate a formal choice model. Next, I fit a <strong>multinomial logit</strong> model using maximum likelihood. In this model, each class \(j\) receives a utility coefficient \(\beta_j\). Higher values of \(\beta_j\) indicate stronger preference.</p>
+<p>For each MaxDiff task, the likelihood has two parts: the probability of the observed best choice from the full set of four items, and the probability of the observed worst choice from the remaining three items, using flipped utilities. The log-likelihood is:</p>
+<p>\[
+\ell(\boldsymbol{\beta}) \;=\; \sum_{\text{tasks}} \Big[\, \beta_{j^*_b} \;-\; \log \!\!\!\sum_{j \in \text{shown}}\!\!\! \exp(\beta_j) \;-\; \beta_{j^*_w} \;-\; \log \!\!\!\!\!\sum_{j \in \text{shown} \setminus \{j^*_b\}}\!\!\!\! \exp(-\beta_j) \,\Big]
+\]</p>
+<p>where \(j^*_b\) is the item selected as best and \(j^*_w\) is the item selected as worst.</p>
+<p>Because MNL utilities are only identified up to an additive constant, I set \(\beta_1 = 0\) as the reference class and estimate the remaining nine coefficients.</p>
+<p>The MNL results are broadly consistent with the counts analysis. Classes that had high best-minus-worst scores also tend to receive larger MNL preference shares. The MNL shares are easier to interpret than the raw utility coefficients because they sum to 1 across the 10 classes and can be read as the predicted share of choices each class would receive if all classes appeared together.</p>
+<p>The highest-ranked class under the MNL model is expected to be similar to the highest-ranked class in the counts analysis. Any differences between the rankings occur because the MNL model accounts for the specific choice sets in which each class appeared, rather than only using aggregate best and worst counts. As a result, the MNL model provides a more formal estimate of relative preference strength.</p>
+</section>
+
+
+<section id="mnl-via-bayesian-estimation" class="level2">
+<h2 class="anchored" data-anchor-id="mnl-via-bayesian-estimation">MNL via Bayesian Estimation</h2>
+<p>In this section, I fit the same MNL model but using <strong>Bayesian estimation</strong>. Instead of finding only the maximum-likelihood estimate, the Bayesian approach estimates a posterior distribution over the utility coefficients. This allows us to describe both the likely value of each preference parameter and the uncertainty around it.</p>
+<p>Using Bayes' rule, the posterior is proportional to the likelihood times the prior:</p>
+<p>\[
+\pi(\boldsymbol{\beta} \mid \boldsymbol{y}) \;\propto\; L(\boldsymbol{\beta}) \cdot \pi(\boldsymbol{\beta})
+\]</p>
+<p>I use a weakly informative normal prior:</p>
+<p>\[
+\boldsymbol{\beta} \sim N(\boldsymbol{0}, 10I)
+\]</p>
+<p>This prior is centered at zero and has a standard deviation of about 3.2 for each coefficient, which is diffuse enough to allow a wide range of preference values while still keeping the estimates reasonable.</p>
+<p>Because the posterior does not have a closed-form solution, I use a random-walk Metropolis-Hastings sampler. At each iteration, the sampler proposes a new value of \(\boldsymbol{\beta}\) by adding random normal noise to the current value, then accepts or rejects the proposal based on the posterior density.</p>
+<p>I start the chain at the MLE estimates from the previous section. The iteration is set at 2,000 for the sample, and the step size is tuned so that the acceptance rate falls in a reasonable range.</p>
+<p>The final Metropolis-Hastings acceptance rate is <strong>0.280</strong>, which falls within the recommended tuning range of roughly 25%–40%. This suggests that the proposal step size is reasonable: the chain is moving enough to explore the posterior while still accepting a sufficient number of proposed draws.</p>
+<p>The Bayesian MNL results should be very close to the MLE results because the prior is weakly informative and the data provide substantial information. The posterior mean utilities are expected to be similar to the MLE coefficients, and the posterior mean shares should follow nearly the same ranking as the MLE shares.</p>
+<p>The main advantage of the Bayesian approach is that it gives a direct measure of uncertainty through the posterior credible intervals. Classes with larger posterior mean shares are estimated to be more preferred, while wider credible intervals indicate more uncertainty about the exact strength of that preference.</p>
+</section>
+
+
+<section id="comparing-the-three-methods" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-the-three-methods">Comparing the Three Methods</h2>
+<p>In this section, I compare the results from the three approaches: the simple <strong>counts analysis</strong>, <strong>the MNL model estimated by maximum likelihood</strong>, and <strong>the Bayesian MNL model</strong>. The goal is to see whether the methods produce similar rankings and where they differ.</p>
+<p>Overall, these three methods yield very similar results. The greatest agreement is typically found at the top and bottom of the rankings. The most preferred class remains at the top across all methods while the least preferred class remains at the bottom. This suggests that the general trends in preferences are consistent regardless of the method used.</p>
+<p>Differences arise primarily in the middle of the rankings, where several classes exhibit similar scores or shares. The MNL model offers added value compared to simple count analysis because it explicitly models the selection process. Each task provides not only information about which items were selected as the best or worst, but also information about the options that were presented but not selected. Bayesian models provide point estimates similar to those of MLE models, but they add a more direct means of conveying uncertainty, particularly regarding derived measures such as preference shares.</p>
+</section>
+
+
+<section id="discussion" class="level2">
+<h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
+<p>Overall, all three methods point to essentially the same conclusion. The results show that students have a strong preference for <strong>MGTA 495 Marketing Analytics</strong>, a course that clearly stands out from the other MSBA core courses. <strong>Business Analytics</strong>, <strong>Customer Analytics</strong>, <strong>Big Data</strong>, <strong>Capstone Project</strong>, <strong>SQL</strong>, among others, also appear to be well-received. On the other hand, <strong>Analytics Consulting</strong>, <strong>Marketing/Finance/Operations</strong>, and <strong>AI Math, Programming, and Analytics</strong> rank lower, with relatively lower preference scores.</p>
+<p>One interesting finding is how clearly <strong>Marketing Analytics</strong> stands out from other courses, suggesting that students may place particular emphasis on applied, specialized analytics courses.</p>
+<p>Methodologically, each approach serves different purposes. <strong>Count analysis</strong> is the simplest and easiest to explain, and is useful for quick descriptive summaries or executive dashboards. The <strong>MLE and MNL models</strong> are more rigorous because they explicitly model the choice process and generate point estimates with standard errors. The <strong>Bayesian MNL model</strong> is the most flexible because it provides a complete posterior distribution, making it easier to summarize uncertainty in preference shares or extend the model to more complex settings, such as individual-level preferences or "what-if" simulations.</p>
+<p>However, there are several important caveats to keep in mind. Since this survey is based on voluntary responses from MSBA students, it is inherently limited in scope. Additionally, students' preferences may be influenced by factors such as their stage in the program, the courses they have already taken, their career goals, and how the survey questions were presented.</p>
+</section>
+
+</main>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {
+          return true;
+        }
+      }
+      return false;
+    };
+    const onCopySuccess = function(e) {
+      let button = e.trigger;
+      const res = button.closest('main').querySelector('.code-copy-button-checked');
+      button.classList.add('code-copy-button-checked');
+      button.ariaLabel = 'Copied!';
+      setTimeout(function() {
+          button.classList.remove('code-copy-button-checked');
+          button.ariaLabel = 'Copy to clipboard';
+      }, 2000);
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button', {
+      text: function(trigger) {
+        const codeEl = trigger.previousElementSibling;
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+      }
+    });
+    clipboard.on('success', onCopySuccess);
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return { el, cites: cites.split(' ') };
+        } else {
+          return findCites(el.parentElement);
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+</body></html>
