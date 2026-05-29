@@ -199,19 +199,14 @@ window.Quarto = { typesetMath };
 <h1 class="title">MaxDiff Analysis of MSBA Class Preferences</h1>
 <p class="subtitle lead">Counts, MLE, and Bayesian estimation of the MNL model</p>
 </div>
-
 <div class="quarto-title-meta">
     <div>
     <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Leia Kawamura </p>
-          </div>
+    <div class="quarto-title-meta-contents"><p>Leia Kawamura </p></div>
   </div>
     <div>
     <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">May 29, 2026</p>
-    </div>
+    <div class="quarto-title-meta-contents"><p class="date">May 29, 2026</p></div>
   </div>
 </div>
 </header>
@@ -221,12 +216,8 @@ window.Quarto = { typesetMath };
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
+<div class="callout-icon-container"><i class="callout-icon"></i></div>
+<div class="callout-title-container flex-fill">Note</div>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>MaxDiff</strong> (Best-Worst Scaling) is a method for measuring relative preferences by asking respondents to select the most preferred and least preferred items from a small set of options. This method is effective because, while assigning consistent ratings on a 1–10 scale is prone to scale-use bias, people are better at making trade-offs.</p>
@@ -240,28 +231,72 @@ Note
 <h2 class="anchored" data-anchor-id="the-data">The Data</h2>
 <p>In this section, we will import the <strong>MaxDiff</strong> survey data and item label files. The main dataset contains one row for each item presented to respondents within a task. Each row includes the respondent ID, task number, item position, and item number, as well as whether the item was selected as "Best," "Worst," or "Neither."</p>
 <p>The other file, the <strong>item-label</strong> file, is used to map the numeric item IDs to the corresponding MSBA course names.</p>
+
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>choices <span class="op">=</span> pd.read_csv(<span class="st">"maxdiff_design_and_choices.csv"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> pd.read_csv(<span class="st">"maxdiff_item_labels.csv"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> choices[<span class="st">"Record ID"</span>].nunique()</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>tasks_per_respondent <span class="op">=</span> choices.groupby(<span class="st">"Record ID"</span>)[<span class="st">"Task"</span>].nunique()</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>items_per_task <span class="op">=</span> choices.groupby([<span class="st">"Record ID"</span>, <span class="st">"Task"</span>]).size()</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> labels[<span class="st">"Item #"</span>].nunique()</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"N respondents: </span><span class="sc">{N}</span><span class="ss">"</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"T tasks per respondent: </span><span class="sc">{tasks_per_respondent.unique()}</span><span class="ss">"</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total study items: </span><span class="sc">{K}</span><span class="ss">"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>N respondents: 85
-T tasks per respondent: [15]
-J items per task: (4 items shown per task)
-Total study items: 10</code></pre>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">import pandas as pd
+
+choices = pd.read_csv("maxdiff_design_and_choices.csv")
+labels = pd.read_csv("maxdiff_item_labels.csv")
+
+N = choices["Record ID"].nunique()
+tasks_per_respondent = choices.groupby("Record ID")["Task"].nunique()
+items_per_task = choices.groupby(["Record ID", "Task"]).size()
+K = labels["Item #"].nunique()
+
+print(f"N respondents: {N}")
+print(f"T tasks per respondent: {tasks_per_respondent.unique()}")
+print("J items per task:")
+print(items_per_task.value_counts().sort_index())
+print(f"Total study items: {K}")</code></pre></div>
 </div>
-</div>
+
 <p>The dataset contains 85 respondents, with 15 tasks per respondent. The item-label file contains 10 total study items, corresponding to the 10 core MSBA classes.</p>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">sanity = (
+    choices.groupby(["Record ID", "Task"])["Response"]
+    .agg(
+        n_rows="size",
+        n_best=lambda x: (x == 1).sum(),
+        n_worst=lambda x: (x == -1).sum(),
+        n_zero=lambda x: (x == 0).sum()
+    )
+)
+
+sanity["pass"] = (
+    (sanity["n_rows"] == 4) &amp;
+    (sanity["n_best"] == 1) &amp;
+    (sanity["n_worst"] == 1) &amp;
+    (sanity["n_zero"] == 2)
+)
+
+sanity["pass"].value_counts()</code></pre></div>
+</div>
+
 <p>The sanity check verifies whether each task has exactly one best choice, one worst choice, and two neutral options. But some tasks do not follow the expected four-row MaxDiff structure, so this check flags those cases before modeling.</p>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">shown_counts = (
+    choices[choices["Item"].isin(labels["Item #"])]
+    .groupby("Item")
+    .size()
+    .reset_index(name="times_shown")
+    .merge(
+        labels[["Item #", "Item"]],
+        left_on="Item",
+        right_on="Item #",
+        how="left"
+    )
+    .rename(columns={
+        "Item_x": "Item",
+        "Item_y": "class_name"
+    })
+)
+
+shown_counts = shown_counts[["Item", "class_name", "times_shown"]]
+shown_counts</code></pre></div>
+</div>
+
 <p>The 10 labeled items are shown a roughly equal number of times, ranging from 323 to 340 exposures. This suggests the MaxDiff design is reasonably balanced across classes.</p>
 </section>
 
@@ -273,6 +308,60 @@ Total study items: 10</code></pre>
 \text{score}_j \;=\; \%\text{best}_j \;-\; \%\text{worst}_j
 \]</p>
 <p>A score closer to +1 means the class was frequently selected as best when shown. On the other hand, a score closer to -1 means it was frequently selected as worst. A score near 0 suggests the class is either middle-of-the-pack or receives mixed reactions from students.</p>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">counts = (
+    choices[choices["Item"].isin(labels["Item #"])]
+    .groupby("Item")
+    .agg(
+        times_shown=("Response", "size"),
+        times_best=("Response", lambda x: (x == 1).sum()),
+        times_worst=("Response", lambda x: (x == -1).sum())
+    )
+    .reset_index()
+    .merge(
+        labels[["Item #", "Item"]],
+        left_on="Item",
+        right_on="Item #",
+        how="left"
+    )
+    .rename(columns={
+        "Item_x": "item",
+        "Item_y": "item_label"
+    })
+)
+
+counts["pct_best"] = counts["times_best"] / counts["times_shown"]
+counts["pct_worst"] = counts["times_worst"] / counts["times_shown"]
+counts["score"] = counts["pct_best"] - counts["pct_worst"]
+
+counts_table = (
+    counts[[
+        "item", "item_label", "times_shown",
+        "times_best", "times_worst",
+        "pct_best", "pct_worst", "score"
+    ]]
+    .sort_values("score", ascending=False)
+)
+
+counts_table</code></pre></div>
+</div>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">import matplotlib.pyplot as plt
+
+plot_data = counts_table.sort_values("score", ascending=True)
+
+plt.figure(figsize=(9, 6))
+plt.barh(plot_data["item_label"], plot_data["score"])
+plt.axvline(0, linestyle="--", linewidth=1)
+plt.xlabel("Counts score (% best - % worst)")
+plt.ylabel("Class")
+plt.title("MaxDiff Counts Scores by Class")
+plt.tight_layout()
+plt.show()</code></pre></div>
+</div>
+
 <p>The counts analysis shows that <strong>MGTA 495 Marketing Analytics</strong> is the most preferred class by a large margin. Its score is much higher than the others, meaning it was selected as "best" far more often than it was selected as "worst" when shown. One possible explanation is that students especially enjoy Professor Dan's class.</p>
 <p>The next most preferred classes are <strong>MGTA 453 Business Analytics</strong>, <strong>MGTA 455 Customer Analytics</strong>, <strong>MGTA 452 Large Data</strong>, <strong>MGTA 454 Capstone Project</strong>, and <strong>MGTA 464 SQL</strong>, all of which have positive scores. This suggests that these classes were generally viewed favorably.</p>
 <p>At the lower end, we observed <strong>MGTA 444 Analytics Consulting</strong>, <strong>MGTA 451 Marketing/Finance/Operations</strong> and <strong>MGTA 403 AI Math, Programming, &amp; Analytics</strong>. Finally, <strong>MGTA 457 Business Intelligence Systems</strong> is close to zero, suggesting a more neutral or middle-of-the-pack preference.</p>
@@ -290,9 +379,40 @@ P(\text{best} = b) \;=\; \frac{\exp(\beta_b)}{\exp(\beta_a) + \exp(\beta_b) + \e
 <p>\[
 P(\text{worst} = c \mid \text{best} = b) \;=\; \frac{\exp(-\beta_c)}{\exp(-\beta_a) + \exp(-\beta_c) + \exp(-\beta_d)}
 \]</p>
-<p>Therefore, each MaxDiff task contributes two MNL-style choice observations: one for the best choice from the full set of four items, and one for the worst choice from the remaining three items.</p>
+<p>Each MaxDiff task contributes two MNL-style choice observations: one for the best choice from the full set of four items, and one for the worst choice from the remaining three items.</p>
 <p>One important issue is <strong>identifiability</strong>. The soft-max probabilities do not change if the same constant is added to every utility coefficient. Since there are 10 classes, only \(J - 1 = 9\) coefficients can be freely estimated. I normalize the model by setting \(\beta_1 = 0\) and estimating the remaining coefficients, \(\beta_2, \ldots, \beta_{10}\).</p>
-<p>After filtering to valid four-item tasks with both a best and worst response, the resulting task-level dataset is ready to be used in the MNL likelihood function.</p>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">choices_10 = choices[choices["Item"].isin(labels["Item #"])].copy()
+
+task_data = (
+    choices_10
+    .groupby(["Record ID", "Task"])
+    .agg(
+        items=("Item", lambda x: list(x)),
+        best=("Item", lambda x: choices_10.loc[x.index[choices_10.loc[x.index, "Response"] == 1], "Item"].iloc[0]
+              if any(choices_10.loc[x.index, "Response"] == 1) else None),
+        worst=("Item", lambda x: choices_10.loc[x.index[choices_10.loc[x.index, "Response"] == -1], "Item"].iloc[0]
+               if any(choices_10.loc[x.index, "Response"] == -1) else None),
+        n_items=("Item", "size")
+    )
+    .reset_index()
+)
+
+task_data = task_data[
+    (task_data["n_items"] == 4) &amp;
+    (task_data["best"].notna()) &amp;
+    (task_data["worst"].notna())
+].copy()
+
+task_data.head()</code></pre></div>
+</div>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">print(f"Number of valid MNL tasks: {len(task_data)}")</code></pre></div>
+</div>
+
+<p>The reshaped dataset now has one row per valid MaxDiff task. Each row stores the four items shown to the respondent, the item chosen as best, and the item chosen as worst. After filtering to valid four-item tasks with both a best and worst response, the resulting task-level dataset is ready to be used in the MNL likelihood function.</p>
 </section>
 
 
@@ -303,8 +423,102 @@ P(\text{worst} = c \mid \text{best} = b) \;=\; \frac{\exp(-\beta_c)}{\exp(-\beta
 <p>\[
 \ell(\boldsymbol{\beta}) \;=\; \sum_{\text{tasks}} \Big[\, \beta_{j^*_b} \;-\; \log \!\!\!\sum_{j \in \text{shown}}\!\!\! \exp(\beta_j) \;-\; \beta_{j^*_w} \;-\; \log \!\!\!\!\!\sum_{j \in \text{shown} \setminus \{j^*_b\}}\!\!\!\! \exp(-\beta_j) \,\Big]
 \]</p>
-<p>where \(j^*_b\) is the item selected as best and \(j^*_w\) is the item selected as worst.</p>
-<p>Because MNL utilities are only identified up to an additive constant, I set \(\beta_1 = 0\) as the reference class and estimate the remaining nine coefficients.</p>
+<p>where \(j^*_b\) is the item selected as best and \(j^*_w\) is the item selected as worst. Because MNL utilities are only identified up to an additive constant, I set \(\beta_1 = 0\) as the reference class and estimate the remaining nine coefficients.</p>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">import numpy as np
+from scipy.optimize import minimize
+from scipy.special import logsumexp
+
+task_data["best"] = task_data["best"].astype(int)
+task_data["worst"] = task_data["worst"].astype(int)
+
+def expand_beta(beta9):
+    beta_full = np.zeros(10)
+    beta_full[1:] = beta9
+    return beta_full
+
+def ll(beta9, task_data):
+    beta = expand_beta(beta9)
+    total_ll = 0.0
+    for _, row in task_data.iterrows():
+        shown = np.array(row["items"], dtype=int)
+        best = int(row["best"])
+        worst = int(row["worst"])
+        shown_idx = shown - 1
+        best_idx = best - 1
+        worst_idx = worst - 1
+        v_best = beta[shown_idx]
+        total_ll += beta[best_idx] - logsumexp(v_best)
+        remaining = shown[shown != best]
+        remaining_idx = remaining - 1
+        v_worst = -beta[remaining_idx]
+        total_ll += -beta[worst_idx] - logsumexp(v_worst)
+    return total_ll
+
+def neg_ll(beta9, task_data):
+    return -ll(beta9, task_data)
+
+start = np.zeros(9)
+out = minimize(neg_ll, start, args=(task_data,), method="BFGS")
+out.success, out.fun</code></pre></div>
+</div>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">beta9_hat = out.x
+beta_hat = expand_beta(beta9_hat)
+
+cov9 = out.hess_inv
+se9 = np.sqrt(np.diag(cov9))
+se_full = np.concatenate([[np.nan], se9])
+
+shares = np.exp(beta_hat) / np.exp(beta_hat).sum()
+
+mnl_results = pd.DataFrame({
+    "item": np.arange(1, 11),
+    "beta_hat": beta_hat,
+    "se": se_full,
+    "share": shares
+})
+
+mnl_results = (
+    mnl_results
+    .merge(labels[["Item #", "Item"]], left_on="item", right_on="Item #", how="left")
+    .rename(columns={"Item": "item_label"})
+    [["item", "item_label", "beta_hat", "se", "share"]]
+    .sort_values("share", ascending=False)
+)
+
+mnl_results</code></pre></div>
+</div>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">import matplotlib.pyplot as plt
+
+plot_mnl = mnl_results.sort_values("share", ascending=True)
+
+plt.figure(figsize=(9, 6))
+plt.barh(plot_mnl["item_label"], plot_mnl["share"])
+plt.xlabel("Share of preference")
+plt.ylabel("Class")
+plt.title("MNL Shares of Preference")
+plt.tight_layout()
+plt.show()</code></pre></div>
+</div>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">comparison = (
+    counts_table[["item", "item_label", "score"]]
+    .rename(columns={"score": "counts_score"})
+    .merge(mnl_results[["item", "share"]], on="item", how="left")
+)
+
+comparison["counts_rank"] = comparison["counts_score"].rank(ascending=False, method="min").astype(int)
+comparison["mnl_rank"] = comparison["share"].rank(ascending=False, method="min").astype(int)
+comparison = comparison.sort_values("mnl_rank")
+comparison</code></pre></div>
+</div>
+
 <p>The MNL results are broadly consistent with the counts analysis. Classes that had high best-minus-worst scores also tend to receive larger MNL preference shares. The MNL shares are easier to interpret than the raw utility coefficients because they sum to 1 across the 10 classes and can be read as the predicted share of choices each class would receive if all classes appeared together.</p>
 <p>The highest-ranked class under the MNL model is expected to be similar to the highest-ranked class in the counts analysis. Any differences between the rankings occur because the MNL model accounts for the specific choice sets in which each class appeared, rather than only using aggregate best and worst counts. As a result, the MNL model provides a more formal estimate of relative preference strength.</p>
 </section>
@@ -317,24 +531,229 @@ P(\text{worst} = c \mid \text{best} = b) \;=\; \frac{\exp(-\beta_c)}{\exp(-\beta
 <p>\[
 \pi(\boldsymbol{\beta} \mid \boldsymbol{y}) \;\propto\; L(\boldsymbol{\beta}) \cdot \pi(\boldsymbol{\beta})
 \]</p>
-<p>I use a weakly informative normal prior:</p>
-<p>\[
-\boldsymbol{\beta} \sim N(\boldsymbol{0}, 10I)
-\]</p>
-<p>This prior is centered at zero and has a standard deviation of about 3.2 for each coefficient, which is diffuse enough to allow a wide range of preference values while still keeping the estimates reasonable.</p>
-<p>Because the posterior does not have a closed-form solution, I use a random-walk Metropolis-Hastings sampler. At each iteration, the sampler proposes a new value of \(\boldsymbol{\beta}\) by adding random normal noise to the current value, then accepts or rejects the proposal based on the posterior density.</p>
+<p>I use a weakly informative normal prior: \(\boldsymbol{\beta} \sim N(\boldsymbol{0}, 10I)\). This prior is centered at zero and has a standard deviation of about 3.2 for each coefficient, which is diffuse enough to allow a wide range of preference values while still keeping the estimates reasonable. Because the posterior does not have a closed-form solution, I use a random-walk Metropolis-Hastings sampler.</p>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def log_prior(beta9):
+    prior_sd = np.sqrt(10)
+    return np.sum(
+        -0.5 * np.log(2 * np.pi * prior_sd**2)
+        -0.5 * (beta9 / prior_sd) ** 2
+    )
+
+def log_post(beta9, task_data):
+    return ll(beta9, task_data) + log_prior(beta9)
+
+def mh_sampler(beta0, n_iter, step, task_data, seed=123):
+    np.random.seed(seed)
+    K = len(beta0)
+    draws = np.zeros((n_iter, K))
+    beta = beta0.copy()
+    lp = log_post(beta, task_data)
+    accept = 0
+    for t in range(n_iter):
+        beta_star = beta + np.random.normal(0, step, size=K)
+        lp_star = log_post(beta_star, task_data)
+        if np.log(np.random.uniform()) &lt; (lp_star - lp):
+            beta = beta_star
+            lp = lp_star
+            accept += 1
+        draws[t, :] = beta
+    accept_rate = accept / n_iter
+    return draws, accept_rate</code></pre></div>
+</div>
+
 <p>I start the chain at the MLE estimates from the previous section. The iteration is set at 2,000 for the sample, and the step size is tuned so that the acceptance rate falls in a reasonable range.</p>
-<p>The final Metropolis-Hastings acceptance rate is <strong>0.280</strong>, which falls within the recommended tuning range of roughly 25%–40%. This suggests that the proposal step size is reasonable: the chain is moving enough to explore the posterior while still accepting a sufficient number of proposed draws.</p>
-<p>The Bayesian MNL results should be very close to the MLE results because the prior is weakly informative and the data provide substantial information. The posterior mean utilities are expected to be similar to the MLE coefficients, and the posterior mean shares should follow nearly the same ranking as the MLE shares.</p>
-<p>The main advantage of the Bayesian approach is that it gives a direct measure of uncertainty through the posterior credible intervals. Classes with larger posterior mean shares are estimated to be more preferred, while wider credible intervals indicate more uncertainty about the exact strength of that preference.</p>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">beta0 = beta9_hat.copy()
+n_iter = 2000
+step = 0.08
+
+draws, accept_rate = mh_sampler(
+    beta0=beta0, n_iter=n_iter, step=step, task_data=task_data, seed=123
+)
+
+print(f"Acceptance rate: {accept_rate:.3f}")</code></pre></div>
+</div>
+
+<p>The final Metropolis-Hastings acceptance rate is <strong>0.280</strong>, which falls within the recommended tuning range of roughly 25%–40%. This suggests that the proposal step size is reasonable.</p>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">burn = int(0.25 * n_iter)
+post_draws = draws[burn:, :]
+
+print(f"Burn-in draws discarded: {burn}")
+print(f"Post-burn-in draws retained: {post_draws.shape[0]}")</code></pre></div>
+</div>
+
+<p>To check convergence visually, I plot trace plots for a few selected coefficients. A good trace plot should look like a stable "fuzzy caterpillar".</p>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">for col, label in zip([0, 1, 8], ["beta_2", "beta_3", "beta_10"]):
+    plt.figure(figsize=(9, 3))
+    plt.plot(draws[:, col], linewidth=0.5)
+    plt.axvline(burn, linestyle="--", linewidth=1)
+    plt.xlabel("Iteration")
+    plt.ylabel(label)
+    plt.title(f"Trace Plot for {label}")
+    plt.tight_layout()
+    plt.show()</code></pre></div>
+</div>
+
+<p>Next, I compute the posterior mean and 95% credible interval for each utility coefficient. Since \(\beta_1\) is fixed to zero for identification, I add it back into the posterior draws before calculating the summaries. I also convert each posterior draw into shares of preference:</p>
+<p>\[
+\hat s_j^{(s)} =
+\frac{\exp(\hat\beta_j^{(s)})}
+{\sum_k \exp(\hat\beta_k^{(s)})}
+\]</p>
+<p>Then I average these shares across posterior draws.</p>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">post_draws_full = np.column_stack([
+    np.zeros(post_draws.shape[0]),
+    post_draws
+])
+
+beta_mean = post_draws_full.mean(axis=0)
+beta_ci_lower = np.percentile(post_draws_full, 2.5, axis=0)
+beta_ci_upper = np.percentile(post_draws_full, 97.5, axis=0)
+
+exp_draws = np.exp(post_draws_full)
+share_draws = exp_draws / exp_draws.sum(axis=1, keepdims=True)
+
+share_mean = share_draws.mean(axis=0)
+share_ci_lower = np.percentile(share_draws, 2.5, axis=0)
+share_ci_upper = np.percentile(share_draws, 97.5, axis=0)
+
+bayes_results = pd.DataFrame({
+    "item": np.arange(1, 11),
+    "post_mean_beta": beta_mean,
+    "beta_ci_lower": beta_ci_lower,
+    "beta_ci_upper": beta_ci_upper,
+    "post_mean_share": share_mean,
+    "share_ci_lower": share_ci_lower,
+    "share_ci_upper": share_ci_upper
+})
+
+bayes_results = (
+    bayes_results
+    .merge(labels[["Item #", "Item"]], left_on="item", right_on="Item #", how="left")
+    .rename(columns={"Item": "item_label"})
+    [["item", "item_label", "post_mean_beta", "beta_ci_lower", "beta_ci_upper",
+      "post_mean_share", "share_ci_lower", "share_ci_upper"]]
+    .sort_values("post_mean_share", ascending=False)
+)
+
+bayes_results</code></pre></div>
+</div>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">plot_bayes = bayes_results.sort_values("post_mean_share", ascending=True)
+
+xerr = [
+    plot_bayes["post_mean_share"] - plot_bayes["share_ci_lower"],
+    plot_bayes["share_ci_upper"] - plot_bayes["post_mean_share"]
+]
+
+plt.figure(figsize=(9, 6))
+plt.barh(plot_bayes["item_label"], plot_bayes["post_mean_share"])
+plt.errorbar(
+    plot_bayes["post_mean_share"], plot_bayes["item_label"],
+    xerr=xerr, fmt="none", capsize=3
+)
+plt.xlabel("Posterior mean share of preference")
+plt.ylabel("Class")
+plt.title("Bayesian MNL Shares with 95% Credible Intervals")
+plt.tight_layout()
+plt.show()</code></pre></div>
+</div>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">mle_bayes_comparison = (
+    mnl_results[["item", "item_label", "beta_hat", "se", "share"]]
+    .merge(
+        bayes_results[["item", "post_mean_beta", "beta_ci_lower", "beta_ci_upper", "post_mean_share"]],
+        on="item", how="left"
+    )
+    .rename(columns={"beta_hat": "mle_beta", "se": "mle_se", "share": "mle_share"})
+)
+
+mle_bayes_comparison</code></pre></div>
+</div>
+
+<p>The Bayesian MNL results should be very close to the MLE results because the prior is weakly informative and the data provide substantial information. The main advantage of the Bayesian approach is that it gives a direct measure of uncertainty through the posterior credible intervals.</p>
 </section>
 
 
 <section id="comparing-the-three-methods" class="level2">
 <h2 class="anchored" data-anchor-id="comparing-the-three-methods">Comparing the Three Methods</h2>
 <p>In this section, I compare the results from the three approaches: the simple <strong>counts analysis</strong>, <strong>the MNL model estimated by maximum likelihood</strong>, and <strong>the Bayesian MNL model</strong>. The goal is to see whether the methods produce similar rankings and where they differ.</p>
-<p>Overall, these three methods yield very similar results. The greatest agreement is typically found at the top and bottom of the rankings. The most preferred class remains at the top across all methods while the least preferred class remains at the bottom. This suggests that the general trends in preferences are consistent regardless of the method used.</p>
-<p>Differences arise primarily in the middle of the rankings, where several classes exhibit similar scores or shares. The MNL model offers added value compared to simple count analysis because it explicitly models the selection process. Each task provides not only information about which items were selected as the best or worst, but also information about the options that were presented but not selected. Bayesian models provide point estimates similar to those of MLE models, but they add a more direct means of conveying uncertainty, particularly regarding derived measures such as preference shares.</p>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">comparison_all = (
+    counts_table[["item", "item_label", "score"]]
+    .rename(columns={"score": "counts_score"})
+    .merge(mnl_results[["item", "share"]], on="item", how="left")
+    .rename(columns={"share": "mle_share"})
+    .merge(bayes_results[["item", "post_mean_share"]], on="item", how="left")
+    .rename(columns={"post_mean_share": "bayes_share"})
+)
+
+comparison_all["counts_rank"] = comparison_all["counts_score"].rank(ascending=False, method="min").astype(int)
+comparison_all["mle_rank"] = comparison_all["mle_share"].rank(ascending=False, method="min").astype(int)
+comparison_all["bayes_rank"] = comparison_all["bayes_share"].rank(ascending=False, method="min").astype(int)
+
+comparison_all = comparison_all[
+    ["item", "item_label", "counts_score", "counts_rank", "mle_share", "mle_rank", "bayes_share", "bayes_rank"]
+].sort_values("mle_rank")
+
+comparison_all</code></pre></div>
+</div>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python">import matplotlib.pyplot as plt
+import numpy as np
+
+items_sorted = comparison_all["item_label"].tolist()
+colors = plt.cm.tab10(np.linspace(0, 1, len(items_sorted)))
+color_map = dict(zip(items_sorted, colors))
+
+fig, axes = plt.subplots(1, 3, figsize=(18, 7))
+
+counts_plot = comparison_all.sort_values("counts_score", ascending=True)
+axes[0].barh(counts_plot["item_label"], counts_plot["counts_score"],
+             color=[color_map[x] for x in counts_plot["item_label"]])
+axes[0].axvline(0, linestyle="--", linewidth=1)
+axes[0].set_title("Counts Score")
+axes[0].set_xlabel("% Best - % Worst")
+axes[0].set_ylabel("Class")
+
+mle_plot = comparison_all.sort_values("mle_share", ascending=True)
+axes[1].barh(mle_plot["item_label"], mle_plot["mle_share"],
+             color=[color_map[x] for x in mle_plot["item_label"]])
+axes[1].set_title("MLE Share")
+axes[1].set_xlabel("Share of Preference")
+axes[1].set_ylabel("")
+
+bayes_plot = comparison_all.sort_values("bayes_share", ascending=True)
+axes[2].barh(bayes_plot["item_label"], bayes_plot["bayes_share"],
+             color=[color_map[x] for x in bayes_plot["item_label"]])
+axes[2].set_title("Bayesian Share")
+axes[2].set_xlabel("Posterior Mean Share")
+axes[2].set_ylabel("")
+
+plt.suptitle("Comparison of Preference Estimates Across Methods")
+plt.tight_layout()
+plt.show()</code></pre></div>
+</div>
+
+<p>Overall, these three methods yield very similar results. The greatest agreement is typically found at the top and bottom of the rankings. The most preferred class remains at the top across all methods while the least preferred class remains at the bottom. Differences arise primarily in the middle of the rankings, where several classes exhibit similar scores or shares.</p>
+<p>The MNL model offers added value compared to simple count analysis because it explicitly models the selection process. Each task provides not only information about which items were selected as the best or worst, but also information about the options that were presented but not selected. Bayesian models provide point estimates similar to those of MLE models, but they add a more direct means of conveying uncertainty, particularly regarding derived measures such as preference shares.</p>
 </section>
 
 
