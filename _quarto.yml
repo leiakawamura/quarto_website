@@ -1,6 +1,11 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - "*.qmd"
+    - "blogs/*.qmd"
+    - "projects/*.qmd"
+    - "!posts_bak/"
 
 website:
   title: "Leia Kawamura"
