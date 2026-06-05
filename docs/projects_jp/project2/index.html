@@ -8,7 +8,7 @@
 
 <meta name="author" content="Leia Kawamura">
 
-<title>Optimizing Wage Outcomes with Snowflake &amp; Python – Leia Kawamura</title>
+<title>SnowflakeとPythonによる賃金最適化 – Leia Kawamura</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -123,11 +158,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview">Project Overview</a></li>
-  <li><a href="#architecture-tools" id="toc-architecture-tools" class="nav-link" data-scroll-target="#architecture-tools">Architecture &amp; Tools</a></li>
-  <li><a href="#data-pipeline-design" id="toc-data-pipeline-design" class="nav-link" data-scroll-target="#data-pipeline-design">Data Pipeline Design</a></li>
-  <li><a href="#analytical-approach" id="toc-analytical-approach" class="nav-link" data-scroll-target="#analytical-approach">Analytical Approach</a></li>
-  <li><a href="#sample-query" id="toc-sample-query" class="nav-link" data-scroll-target="#sample-query">Sample Query</a></li>
+  <li><a href="#プロジェクト概要" id="toc-プロジェクト概要" class="nav-link active" data-scroll-target="#プロジェクト概要">プロジェクト概要</a></li>
+  <li><a href="#使用技術ツール" id="toc-使用技術ツール" class="nav-link" data-scroll-target="#使用技術ツール">使用技術・ツール</a></li>
+  <li><a href="#データパイプラインの設計" id="toc-データパイプラインの設計" class="nav-link" data-scroll-target="#データパイプラインの設計">データパイプラインの設計</a></li>
+  <li><a href="#分析アプローチ" id="toc-分析アプローチ" class="nav-link" data-scroll-target="#分析アプローチ">分析アプローチ</a></li>
+  <li><a href="#サンプルクエリ" id="toc-サンプルクエリ" class="nav-link" data-scroll-target="#サンプルクエリ">サンプルクエリ</a></li>
   </ul>
 </nav>
     </div>
@@ -136,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Optimizing Wage Outcomes with Snowflake &amp; Python</h1>
+<h1 class="title">SnowflakeとPythonによる賃金最適化</h1>
 </div>
 
 
@@ -165,54 +200,158 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="project-overview" class="level1">
-<h1>Project Overview</h1>
-<p>This project demonstrates the design and implementation of a scalable, cloud-based data pipeline using <strong>Snowflake</strong> and <strong>Python</strong> to analyze wage trends across industries and geographic regions. The objective was to identify high-opportunity industry-location combinations and support data-driven decision-making.</p>
-<p>By leveraging modern data engineering and analytics techniques, the project delivered actionable insights that contributed to a <strong>10% improvement in wage outcomes</strong>.</p>
+<section id="プロジェクト概要" class="level1">
+<h1>プロジェクト概要</h1>
+<p>このプロジェクトでは、<strong>Snowflake</strong> と <strong>Python</strong> を用いたスケーラブルなクラウドベースのデータパイプラインを設計・実装し、産業別・地域別の賃金トレンドを分析しました。目的は、高機会の産業×地域の組み合わせを特定し、データに基づいた意思決定を支援することです。</p>
+<p>最新のデータエンジニアリングと分析技術を活用した結果、<strong>賃金アウトカムの10%改善</strong>に貢献する実用的なインサイトを提供しました。</p>
 <hr>
 </section>
-<section id="architecture-tools" class="level1">
-<h1>Architecture &amp; Tools</h1>
+<section id="使用技術ツール" class="level1">
+<h1>使用技術・ツール</h1>
 <ul>
-<li><strong>Cloud Data Warehouse:</strong> Snowflake</li>
-<li><strong>Programming Language:</strong> Python</li>
-<li><strong>Data Access:</strong> Snowflake Connector for Python</li>
-<li><strong>Query Language:</strong> SQL</li>
-<li><strong>Concepts Applied:</strong> ETL pipelines, Location Quotient (LQ), data modeling, exploratory analysis</li>
+<li><strong>クラウドデータウェアハウス：</strong> Snowflake</li>
+<li><strong>プログラミング言語：</strong> Python</li>
+<li><strong>データアクセス：</strong> Snowflake Connector for Python</li>
+<li><strong>クエリ言語：</strong> SQL</li>
+<li><strong>適用概念：</strong> ETLパイプライン、立地係数（LQ）、データモデリング、探索的分析</li>
 </ul>
 <hr>
 </section>
-<section id="data-pipeline-design" class="level1">
-<h1>Data Pipeline Design</h1>
-<p>An end-to-end pipeline was engineered to:</p>
+<section id="データパイプラインの設計" class="level1">
+<h1>データパイプラインの設計</h1>
+<p>エンドツーエンドのパイプラインを構築し、以下を実現しました：</p>
 <ol type="1">
-<li>Establish a secure connection to Snowflake</li>
-<li>Provision a <strong>Virtual Warehouse</strong> for compute scalability</li>
-<li>Create and manage a structured <strong>database schema</strong></li>
-<li>Ingest and transform wage-related datasets</li>
-<li>Enable efficient querying for downstream analysis</li>
+<li>Snowflakeへの安全な接続の確立</li>
+<li>計算スケーラビリティのための<strong>仮想ウェアハウス</strong>のプロビジョニング</li>
+<li>構造化された<strong>データベーススキーマ</strong>の作成・管理</li>
+<li>賃金関連データセットの取り込みと変換</li>
+<li>下流分析のための効率的なクエリの実現</li>
 </ol>
-<p>This architecture ensures <strong>high performance, scalability, and cost-efficient compute usage</strong>.</p>
+<p>このアーキテクチャにより、<strong>高いパフォーマンス・スケーラビリティ・コスト効率の高い計算処理</strong>を実現しています。</p>
 <hr>
 </section>
-<section id="analytical-approach" class="level1">
-<h1>Analytical Approach</h1>
-<p>The analysis focused on identifying wage disparities using <strong>Location Quotient (LQ)</strong> metrics. This method compares the concentration of wages in a specific industry and region against a broader benchmark.</p>
-<p>Key steps included: - Aggregating wage data across industries and locations - Calculating LQ to identify high-growth or underrepresented sectors - Ranking industry-location pairs based on wage potential</p>
+<section id="分析アプローチ" class="level1">
+<h1>分析アプローチ</h1>
+<p>分析では、<strong>立地係数（LQ）</strong> 指標を用いて賃金格差を特定することに焦点を当てました。この手法は、特定の産業・地域における賃金の集中度を、より広範なベンチマークと比較するものです。</p>
+<p>主なステップは以下の通りです： - 産業・地域をまたいだ賃金データの集計 - LQの算出による高成長または過小評価されたセクターの特定 - 賃金ポテンシャルに基づく産業×地域ペアのランキング</p>
 <hr>
 </section>
-<section id="sample-query" class="level1">
-<h1>Sample Query</h1>
-<p>#| message: false</p>
-<p>library(DBI) library(odbc)</p>
-<p>con &lt;- dbConnect(odbc::odbc(), Driver = “SnowflakeDSIIDriver”, Server = “your_account.snowflakecomputing.com”, UID = “your_username”, PWD = “your_password”, Warehouse = “COMPUTE_WH”, Database = “WAGE_DB”, Schema = “PUBLIC”)</p>
-<p>query &lt;- ” SELECT industry, location, AVG(wage) AS avg_wage FROM wage_data GROUP BY industry, location ORDER BY avg_wage DESC LIMIT 10; ”</p>
-<p>results &lt;- dbGetQuery(con, query) results</p>
+<section id="サンプルクエリ" class="level1">
+<h1>サンプルクエリ</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(odbc)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(odbc<span class="sc">::</span><span class="fu">odbc</span>(),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Driver =</span> <span class="st">"SnowflakeDSIIDriver"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Server =</span> <span class="st">"your_account.snowflakecomputing.com"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">UID =</span> <span class="st">"your_username"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">PWD =</span> <span class="st">"your_password"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Warehouse =</span> <span class="st">"COMPUTE_WH"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Database =</span> <span class="st">"WAGE_DB"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Schema =</span> <span class="st">"PUBLIC"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>query <span class="ot">&lt;-</span> <span class="st">"</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT industry, location, AVG(wage) AS avg_wage</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="st">FROM wage_data</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY industry, location</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY avg_wage DESC</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="st">LIMIT 10;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">dbGetQuery</span>(con, query)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>results</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>
 
 </main> <!-- /main -->
+<script>
+(function () {
+  var EN_TO_JP = {
+    'index.html': 'index_jp.html',
+    'resume.html': 'resume_jp.html',
+    'projects.html': 'projects_jp.html',
+    'blog.html': 'blog.html',
+    'projects/project1/index.html': 'projects_jp/project1/index.html',
+    'projects/project2/index.html': 'projects_jp/project2/index.html',
+    'blogs/card-krueger.html': 'blogs/card-krueger.html',
+    'blogs/hw3_questions.html': 'blogs/hw3_questions.html',
+    'blogs/hw4_questions.html': 'blogs/hw4_questions.html'
+  };
+
+  var JP_TO_EN = {
+    'index_jp.html': 'index.html',
+    'resume_jp.html': 'resume.html',
+    'projects_jp.html': 'projects.html',
+    'projects_jp/project1/index.html': 'projects/project1/index.html',
+    'projects_jp/project2/index.html': 'projects/project2/index.html'
+  };
+
+  function detectPage(path) {
+    if (path.endsWith('/')) path = path + 'index.html';
+    var enKey, jpKey, base;
+    for (enKey in EN_TO_JP) {
+      if (path.endsWith('/' + enKey)) {
+        base = path.slice(0, path.length - enKey.length);
+        return { lang: 'en', enHref: path, jpHref: base + EN_TO_JP[enKey] };
+      }
+    }
+    for (jpKey in JP_TO_EN) {
+      if (path.endsWith('/' + jpKey)) {
+        base = path.slice(0, path.length - jpKey.length);
+        return { lang: 'jp', enHref: base + JP_TO_EN[jpKey], jpHref: path };
+      }
+    }
+    return { lang: 'en', enHref: path, jpHref: path };
+  }
+
+  var page = detectPage(window.location.pathname);
+  var savedLang = localStorage.getItem('site-lang');
+
+  if (savedLang && savedLang !== page.lang) {
+    var target = savedLang === 'jp' ? page.jpHref : page.enHref;
+    if (target && target !== window.location.pathname) {
+      window.location.replace(target);
+    }
+  }
+
+  var lang = savedLang || page.lang;
+
+  function inject() {
+    var collapse = document.getElementById('navbarCollapse');
+    if (!collapse) return;
+
+    var label = lang === 'jp' ? '🇯🇵 JP' : '🇺🇸 EN';
+    var ul = document.createElement('ul');
+    ul.className = 'navbar-nav ms-auto lang-switcher-nav';
+    ul.innerHTML =
+      '<li class="nav-item dropdown">' +
+        '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">' +
+          label +
+        '</a>' +
+        '<ul class="dropdown-menu dropdown-menu-end">' +
+          '<li><a class="dropdown-item' + (lang === 'en' ? ' active' : '') + '" id="lang-en" href="' + page.enHref + '">🇺🇸 English</a></li>' +
+          '<li><a class="dropdown-item' + (lang === 'jp' ? ' active' : '') + '" id="lang-jp" href="' + page.jpHref + '">🇯🇵 日本語</a></li>' +
+        '</ul>' +
+      '</li>';
+
+    collapse.appendChild(ul);
+
+    document.getElementById('lang-en').addEventListener('click', function () {
+      localStorage.setItem('site-lang', 'en');
+    });
+    document.getElementById('lang-jp').addEventListener('click', function () {
+      localStorage.setItem('site-lang', 'jp');
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', inject);
+  } else {
+    inject();
+  }
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

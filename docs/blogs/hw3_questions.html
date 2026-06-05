@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Leia Kawamura">
-<meta name="dcterms.date" content="2026-05-18">
+<meta name="dcterms.date" content="2026-06-04">
 
 <title>Poisson Regression and Maximum Likelihood Estimation – Leia Kawamura</title>
 <style>
@@ -225,7 +225,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 18, 2026</p>
+      <p class="date">June 4, 2026</p>
     </div>
   </div>
   
@@ -247,7 +247,7 @@ window.Quarto = {
 <section id="exploring-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="exploring-the-data">Exploring the Data</h2>
 <p>Before estimating the relationship between Blueprinty use and patent outcomes, I first examine the raw differences between customers and non-customers. This exploratory analysis compares patent counts, regional location, and firm age across the two groups. These comparisons help show whether Blueprinty customers differ systematically from non-customers, which is important because customer status is not randomly assigned.</p>
-<div id="febdedf4" class="cell" data-execution_count="1">
+<div id="364eee59" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -316,7 +316,7 @@ window.Quarto = {
 </section>
 <section id="patent-counts-by-customer" class="level2">
 <h2 class="anchored" data-anchor-id="patent-counts-by-customer">Patent Counts by Customer</h2>
-<div id="04658847" class="cell" data-execution_count="2">
+<div id="b2a70cb5" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>non_customer <span class="op">=</span> (blueprinty.<span class="bu">filter</span>(pl.col(<span class="st">"iscustomer"</span>) <span class="op">==</span> <span class="dv">0</span>).select(pl.col(<span class="st">"patents"</span>).mean()))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>customer <span class="op">=</span> (blueprinty.<span class="bu">filter</span>(pl.col(<span class="st">"iscustomer"</span>) <span class="op">==</span> <span class="dv">1</span>).select(pl.col(<span class="st">"patents"</span>).mean()))</span>
@@ -341,7 +341,7 @@ window.Quarto = {
  └──────────┘)</code></pre>
 </div>
 </div>
-<div id="4afb9662" class="cell" data-execution_count="3">
+<div id="1e13bc84" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>non_customer_patents <span class="op">=</span> (blueprinty.<span class="bu">filter</span>(pl.col(<span class="st">"iscustomer"</span>) <span class="op">==</span> <span class="dv">0</span>).select(<span class="st">"patents"</span>).to_series())</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>customer_patents <span class="op">=</span> (blueprinty.<span class="bu">filter</span>(pl.col(<span class="st">"iscustomer"</span>) <span class="op">==</span> <span class="dv">1</span>).select(<span class="st">"patents"</span>).to_series())</span>
@@ -378,7 +378,7 @@ window.Quarto = {
 </section>
 <section id="regional-distribution-by-customer-status" class="level2">
 <h2 class="anchored" data-anchor-id="regional-distribution-by-customer-status">Regional Distribution by Customer Status</h2>
-<div id="c6bc9f2e" class="cell" data-execution_count="4">
+<div id="b193c027" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>non_customer_regions <span class="op">=</span> (</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    blueprinty</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>(pl.col(<span class="st">"iscustomer"</span>) <span class="op">==</span> <span class="dv">0</span>)</span>
@@ -429,7 +429,7 @@ window.Quarto = {
  └───────────┴─────┴────────────┘)</code></pre>
 </div>
 </div>
-<div id="12d3904f" class="cell" data-execution_count="5">
+<div id="9d48e363" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>regions <span class="op">=</span> non_customer_regions[<span class="st">"region"</span>].to_list()</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>non_customer_props <span class="op">=</span> non_customer_regions[<span class="st">"proportion"</span>].to_list()</span>
@@ -463,7 +463,7 @@ window.Quarto = {
 </section>
 <section id="firm-age-by-customer-status" class="level2">
 <h2 class="anchored" data-anchor-id="firm-age-by-customer-status">Firm Age by Customer Status</h2>
-<div id="936ca7f3" class="cell" data-execution_count="6">
+<div id="26cc10cd" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>non_customer_age <span class="op">=</span> (blueprinty.<span class="bu">filter</span>(pl.col(<span class="st">"iscustomer"</span>) <span class="op">==</span> <span class="dv">0</span>).select(<span class="st">"age"</span>).to_series())</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>customer_age <span class="op">=</span> (blueprinty.<span class="bu">filter</span>(pl.col(<span class="st">"iscustomer"</span>) <span class="op">==</span> <span class="dv">1</span>).select(<span class="st">"age"</span>).to_series())</span>
@@ -502,7 +502,7 @@ window.Quarto = {
  ])</code></pre>
 </div>
 </div>
-<div id="b151bfcb" class="cell" data-execution_count="7">
+<div id="2447fb04" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x_min <span class="op">=</span> blueprinty.select(pl.col(<span class="st">"age"</span>).<span class="bu">min</span>()).item()</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>x_max <span class="op">=</span> blueprinty.select(pl.col(<span class="st">"age"</span>).<span class="bu">max</span>()).item()</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -569,12 +569,12 @@ L(\lambda|Y)
 = -n\lambda + \left(\sum_{i=1}^{n}Y_i\right)\log(\lambda) - \sum_{i=1}^{n}\log(Y_i!)
 \]</span></p>
 <p>The maximum likelihood estimate is the value of <span class="math inline">\(\lambda\)</span> that makes the observed patent counts most likely.</p>
-<div id="8ffc07a2" class="cell" data-execution_count="8">
+<div id="d157da80" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.optimize <span class="im">as</span> sp</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> gammaln</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="2d79f0a9" class="cell" data-execution_count="9">
+<div id="e2db3c37" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> blueprinty[<span class="st">"patents"</span>].to_numpy()</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> poisson_loglikelihood(lam, Y):</span>
@@ -588,7 +588,7 @@ L(\lambda|Y)
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> log_likelihood</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="4e264b50" class="cell" data-execution_count="10">
+<div id="7a6d3003" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>lambda_grid <span class="op">=</span> np.linspace(<span class="fl">0.01</span>, <span class="dv">10</span>, <span class="dv">500</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>loglik_values <span class="op">=</span> [</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    poisson_loglikelihood(lam, Y) <span class="cf">for</span> lam <span class="kw">in</span> lambda_grid</span>
@@ -631,14 +631,14 @@ L(\lambda|Y)
 = \bar{Y}
 \]</span></p>
 <p>This result makes sense because the mean of a Poisson distribution is <span class="math inline">\(\lambda\)</span>.</p>
-<div id="3afadb1c" class="cell" data-execution_count="11">
+<div id="1ab63108" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sample_mean <span class="op">=</span> np.mean(Y)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>sample_mean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>np.float64(3.6846666666666668)</code></pre>
 </div>
 </div>
-<div id="12ddeb26" class="cell" data-execution_count="12">
+<div id="74a26adc" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> negative_poisson_loglikelihood(lam, Y):</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>poisson_loglikelihood(lam[<span class="dv">0</span>], Y)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> sp.minimize(</span>
@@ -655,7 +655,7 @@ L(\lambda|Y)
 <pre><code>np.float64(3.6846666666666668)</code></pre>
 </div>
 </div>
-<div id="fd989ff1" class="cell" data-execution_count="13">
+<div id="5d6f4e37" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>sample_mean, mle_lambda</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>(np.float64(3.6846666666666668), np.float64(3.6846666666666668))</code></pre>
@@ -689,12 +689,12 @@ Y_i X_i'\beta
 \right].
 \]</span></p>
 <p>The maximum likelihood estimate <span class="math inline">\(\hat{\beta}\)</span> is the value of <span class="math inline">\(\beta\)</span> that maximizes this log-likelihood.</p>
-<div id="cea510e5" class="cell" data-execution_count="14">
+<div id="d8eecf9f" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>blueprinty_pd <span class="op">=</span> pd.read_csv(<span class="st">"blueprinty.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="7b9b61a7" class="cell" data-execution_count="15">
+<div id="7baf983a" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>blueprinty_pd <span class="op">=</span> blueprinty.to_pandas()</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> blueprinty_pd[<span class="st">"patents"</span>].to_numpy()</span>
@@ -736,7 +736,7 @@ Y_i X_i'\beta
 </div>
 </div>
 <p>The matrix <span class="math inline">\(X\)</span> includes an intercept, firm age, firm age squared, region indicators, and customer status. I include age squared because the relationship between firm age and patenting may not be perfectly linear. For example, patenting may increase as firms mature but eventually level off. I drop one region category when constructing the region indicators because including all regions along with an intercept would create perfect collinearity. The omitted region becomes the reference category.</p>
-<div id="882a69b2" class="cell" data-execution_count="16">
+<div id="12af2201" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> poisson_regression_loglikelihood(beta, Y, X):</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    eta <span class="op">=</span> X <span class="op">@</span> beta</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    lam <span class="op">=</span> np.exp(eta)</span>
@@ -749,7 +749,7 @@ Y_i X_i'\beta
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> log_likelihood</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="f1cf18c7" class="cell" data-execution_count="17">
+<div id="6e93468d" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> negative_poisson_regression_loglikelihood(beta, Y, X):</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>poisson_regression_loglikelihood(beta, Y, X)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -770,7 +770,7 @@ Y_i X_i'\beta
         0.05656538,  0.0505674 ,  0.20760926])</code></pre>
 </div>
 </div>
-<div id="d54c9ebe" class="cell" data-execution_count="18">
+<div id="84085eed" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>lambda_hat <span class="op">=</span> np.exp(X <span class="op">@</span> beta_hat)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>hessian <span class="op">=</span> <span class="op">-</span>(X.T <span class="op">*</span> lambda_hat) <span class="op">@</span> X</span>
@@ -844,7 +844,7 @@ Y_i X_i'\beta
 </div>
 </div>
 </div>
-<div id="521597f4" class="cell" data-execution_count="19">
+<div id="273b2010" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>poisson_glm <span class="op">=</span> sm.GLM(</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    Y,</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    X,</span>
@@ -939,7 +939,7 @@ Y_i X_i'\beta
 </div>
 </div>
 <p>The coefficient estimates obtained from the manually optimized likelihood function and the Poisson GLM in <code>statsmodels</code> are very close. This confirms that the log-likelihood function and the optimization procedure are working correctly. While the standard errors may differ slightly, this is because the manual calculation uses the Hessian evaluated at the estimated coefficients, whereas <code>statsmodels</code> employs its own numerical calculations and implementation details.</p>
-<div id="833bd5df" class="cell" data-execution_count="20">
+<div id="ca7392c6" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>interpretation_table <span class="op">=</span> results_table.copy()</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>interpretation_table[<span class="st">"incidence_rate_ratio"</span>] <span class="op">=</span> np.exp(</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    interpretation_table[<span class="st">"coefficient"</span>]</span>
@@ -1034,7 +1034,7 @@ Y_i X_i'\beta
 <h2 class="anchored" data-anchor-id="the-effect-of-blueprintys-software">The Effect of Blueprinty’s Software</h2>
 <p>The customer coefficient from the Poisson regression is useful, but it is not directly interpreted as the number of additional patents caused by Blueprinty. This is because the Poisson regression model is multiplicative: the coefficients affect the expected patent count through <span class="math inline">\(\lambda_i = \exp(X_i'\beta)\)</span>. To make the result easier to interpret, I construct two counterfactual datasets.</p>
 <p>In the first counterfactual dataset, every firm is treated as if it were not a Blueprinty customer. In the second counterfactual dataset, every firm is treated as if it were a Blueprinty customer. All other firm characteristics, including age, age squared, and region, are held fixed at their observed values. Comparing the predicted patent counts under these two scenarios gives an estimate of the average difference associated with Blueprinty customer status.</p>
-<div id="d182325a" class="cell" data-execution_count="21">
+<div id="631864fc" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>customer_col <span class="op">=</span> coef_names.index(<span class="st">"iscustomer"</span>)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>X0 <span class="op">=</span> X.copy()</span>
@@ -1067,6 +1067,93 @@ Estimated average effect of Blueprinty customer status: 0.7928</code></pre>
 </section>
 
 </main> <!-- /main -->
+<script>
+(function () {
+  var EN_TO_JP = {
+    'index.html': 'index_jp.html',
+    'resume.html': 'resume_jp.html',
+    'projects.html': 'projects_jp.html',
+    'blog.html': 'blog.html',
+    'projects/project1/index.html': 'projects_jp/project1/index.html',
+    'projects/project2/index.html': 'projects_jp/project2/index.html',
+    'blogs/card-krueger.html': 'blogs/card-krueger.html',
+    'blogs/hw3_questions.html': 'blogs/hw3_questions.html',
+    'blogs/hw4_questions.html': 'blogs/hw4_questions.html'
+  };
+
+  var JP_TO_EN = {
+    'index_jp.html': 'index.html',
+    'resume_jp.html': 'resume.html',
+    'projects_jp.html': 'projects.html',
+    'projects_jp/project1/index.html': 'projects/project1/index.html',
+    'projects_jp/project2/index.html': 'projects/project2/index.html'
+  };
+
+  function detectPage(path) {
+    if (path.endsWith('/')) path = path + 'index.html';
+    var enKey, jpKey, base;
+    for (enKey in EN_TO_JP) {
+      if (path.endsWith('/' + enKey)) {
+        base = path.slice(0, path.length - enKey.length);
+        return { lang: 'en', enHref: path, jpHref: base + EN_TO_JP[enKey] };
+      }
+    }
+    for (jpKey in JP_TO_EN) {
+      if (path.endsWith('/' + jpKey)) {
+        base = path.slice(0, path.length - jpKey.length);
+        return { lang: 'jp', enHref: base + JP_TO_EN[jpKey], jpHref: path };
+      }
+    }
+    return { lang: 'en', enHref: path, jpHref: path };
+  }
+
+  var page = detectPage(window.location.pathname);
+  var savedLang = localStorage.getItem('site-lang');
+
+  if (savedLang && savedLang !== page.lang) {
+    var target = savedLang === 'jp' ? page.jpHref : page.enHref;
+    if (target && target !== window.location.pathname) {
+      window.location.replace(target);
+    }
+  }
+
+  var lang = savedLang || page.lang;
+
+  function inject() {
+    var collapse = document.getElementById('navbarCollapse');
+    if (!collapse) return;
+
+    var label = lang === 'jp' ? '🇯🇵 JP' : '🇺🇸 EN';
+    var ul = document.createElement('ul');
+    ul.className = 'navbar-nav ms-auto lang-switcher-nav';
+    ul.innerHTML =
+      '<li class="nav-item dropdown">' +
+        '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">' +
+          label +
+        '</a>' +
+        '<ul class="dropdown-menu dropdown-menu-end">' +
+          '<li><a class="dropdown-item' + (lang === 'en' ? ' active' : '') + '" id="lang-en" href="' + page.enHref + '">🇺🇸 English</a></li>' +
+          '<li><a class="dropdown-item' + (lang === 'jp' ? ' active' : '') + '" id="lang-jp" href="' + page.jpHref + '">🇯🇵 日本語</a></li>' +
+        '</ul>' +
+      '</li>';
+
+    collapse.appendChild(ul);
+
+    document.getElementById('lang-en').addEventListener('click', function () {
+      localStorage.setItem('site-lang', 'en');
+    });
+    document.getElementById('lang-jp').addEventListener('click', function () {
+      localStorage.setItem('site-lang', 'jp');
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', inject);
+  } else {
+    inject();
+  }
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

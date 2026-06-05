@@ -278,7 +278,7 @@ window.Quarto = {
 <p><span class="math display">\[
 \text{FTE} = \text{Managers} + \text{Full-time workers} + 0.5 \times \text{Part-time workers}
 \]</span></p>
-<div id="823363bd" class="cell" data-execution_count="1">
+<div id="1dec2448" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -327,7 +327,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="table-2-pre-treatment-comparability">Table 2: Pre-Treatment Comparability</h2>
 <p>Before interpreting any DiD estimate, we need to check whether NJ and PA restaurants were similar <em>before</em> the minimum wage increase. If NJ stores were already very different from PA stores at baseline, the parallel trends assumption becomes less credible.</p>
 <p>Table 2 from the paper reports means for key variables in both waves. I replicate selected rows from Panel A (wave 1) and Panel B (wave 2) below.</p>
-<div id="8aa27866" class="cell" data-execution_count="2">
+<div id="4ee5c97a" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>nj_all <span class="op">=</span> df[df[<span class="st">'state'</span>] <span class="op">==</span> <span class="dv">1</span>]</span>
@@ -363,59 +363,59 @@ window.Quarto = {
 </details>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <style type="text/css">
-#T_a72a2 caption {
+#T_0d6ee caption {
   font-weight: bold;
   font-size: 1.05em;
 }
-#T_a72a2 th {
+#T_0d6ee th {
   background-color: #f0f0f0;
 }
 </style>
 
-<div id="T_a72a2" class="quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true">
+<div id="T_0d6ee" class="quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_a72a2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_0d6ee-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;1: Table 2 (selected rows): Means by State and Wave
 </figcaption>
-<div aria-describedby="T_a72a2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_a72a2" class="caption-top table table-sm table-striped small">
+<div aria-describedby="T_0d6ee-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="T_0d6ee" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_a72a2_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">NJ (wave 1)</th>
-<th id="T_a72a2_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">PA (wave 1)</th>
-<th id="T_a72a2_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">NJ (wave 2)</th>
-<th id="T_a72a2_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">PA (wave 2)</th>
+<th id="T_0d6ee_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">NJ (wave 1)</th>
+<th id="T_0d6ee_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">PA (wave 1)</th>
+<th id="T_0d6ee_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">NJ (wave 2)</th>
+<th id="T_0d6ee_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">PA (wave 2)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th id="T_a72a2_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">FTE employment</th>
-<td id="T_a72a2_row0_col0" class="data row0 col0">20.39</td>
-<td id="T_a72a2_row0_col1" class="data row0 col1">23.33</td>
-<td id="T_a72a2_row0_col2" class="data row0 col2">18.95</td>
-<td id="T_a72a2_row0_col3" class="data row0 col3">19.83</td>
+<th id="T_0d6ee_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">FTE employment</th>
+<td id="T_0d6ee_row0_col0" class="data row0 col0">20.39</td>
+<td id="T_0d6ee_row0_col1" class="data row0 col1">23.33</td>
+<td id="T_0d6ee_row0_col2" class="data row0 col2">18.95</td>
+<td id="T_0d6ee_row0_col3" class="data row0 col3">19.83</td>
 </tr>
 <tr class="even">
-<th id="T_a72a2_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Starting wage ($/hr)</th>
-<td id="T_a72a2_row1_col0" class="data row1 col0">4.61</td>
-<td id="T_a72a2_row1_col1" class="data row1 col1">4.63</td>
-<td id="T_a72a2_row1_col2" class="data row1 col2">5.08</td>
-<td id="T_a72a2_row1_col3" class="data row1 col3">4.62</td>
+<th id="T_0d6ee_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Starting wage ($/hr)</th>
+<td id="T_0d6ee_row1_col0" class="data row1 col0">4.61</td>
+<td id="T_0d6ee_row1_col1" class="data row1 col1">4.63</td>
+<td id="T_0d6ee_row1_col2" class="data row1 col2">5.08</td>
+<td id="T_0d6ee_row1_col3" class="data row1 col3">4.62</td>
 </tr>
 <tr class="odd">
-<th id="T_a72a2_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Hours open (weekday)</th>
-<td id="T_a72a2_row2_col0" class="data row2 col0">8.10</td>
-<td id="T_a72a2_row2_col1" class="data row2 col1">7.82</td>
-<td id="T_a72a2_row2_col2" class="data row2 col2">14.42</td>
-<td id="T_a72a2_row2_col3" class="data row2 col3">14.65</td>
+<th id="T_0d6ee_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Hours open (weekday)</th>
+<td id="T_0d6ee_row2_col0" class="data row2 col0">8.10</td>
+<td id="T_0d6ee_row2_col1" class="data row2 col1">7.82</td>
+<td id="T_0d6ee_row2_col2" class="data row2 col2">14.42</td>
+<td id="T_0d6ee_row2_col3" class="data row2 col3">14.65</td>
 </tr>
 <tr class="even">
-<th id="T_a72a2_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">% earning minimum wage</th>
-<td id="T_a72a2_row3_col0" class="data row3 col0">30.51</td>
-<td id="T_a72a2_row3_col1" class="data row3 col1">32.91</td>
-<td id="T_a72a2_row3_col2" class="data row3 col2">—</td>
-<td id="T_a72a2_row3_col3" class="data row3 col3">—</td>
+<th id="T_0d6ee_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">% earning minimum wage</th>
+<td id="T_0d6ee_row3_col0" class="data row3 col0">30.51</td>
+<td id="T_0d6ee_row3_col1" class="data row3 col1">32.91</td>
+<td id="T_0d6ee_row3_col2" class="data row3 col2">—</td>
+<td id="T_0d6ee_row3_col3" class="data row3 col3">—</td>
 </tr>
 </tbody>
 </table>
@@ -431,7 +431,7 @@ Table&nbsp;1: Table 2 (selected rows): Means by State and Wave
 <section id="table-3-the-difference-in-differences-grid" class="level2">
 <h2 class="anchored" data-anchor-id="table-3-the-difference-in-differences-grid">Table 3: The Difference-in-Differences Grid</h2>
 <p>The heart of Card and Krueger’s empirical strategy is Table 3. It presents mean FTE employment for NJ and PA in both waves, along with the within-state changes and the cross-state difference-in-differences.</p>
-<div id="549fbc3e" class="cell" data-execution_count="3">
+<div id="46dd7763" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>nj_w1 <span class="op">=</span> nj[<span class="st">'fte'</span>].mean()</span>
@@ -466,56 +466,56 @@ Table&nbsp;1: Table 2 (selected rows): Means by State and Wave
 </details>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <style type="text/css">
-#T_58d02 caption {
+#T_afe7b caption {
   font-weight: bold;
   font-size: 1.05em;
 }
-#T_58d02 th {
+#T_afe7b th {
   background-color: #f0f0f0;
 }
-#T_58d02 .row2 {
+#T_afe7b .row2 {
   font-weight: bold;
   background-color: #fffde7;
 }
-#T_58d02_row2_col0, #T_58d02_row2_col1, #T_58d02_row2_col2 {
+#T_afe7b_row2_col0, #T_afe7b_row2_col1, #T_afe7b_row2_col2 {
   font-weight: bold;
   background-color: #fffde7;
 }
 </style>
 
-<div id="T_58d02" class="quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true">
+<div id="T_afe7b" class="quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_58d02-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_afe7b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;2: Table 3: Mean FTE Employment Before and After the NJ Minimum Wage Increase
 </figcaption>
-<div aria-describedby="T_58d02-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_58d02" class="caption-top table table-sm table-striped small">
+<div aria-describedby="T_afe7b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="T_afe7b" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_58d02_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">New Jersey</th>
-<th id="T_58d02_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Pennsylvania</th>
-<th id="T_58d02_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Difference (NJ − PA)</th>
+<th id="T_afe7b_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">New Jersey</th>
+<th id="T_afe7b_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Pennsylvania</th>
+<th id="T_afe7b_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Difference (NJ − PA)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th id="T_58d02_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Wave 1 (before, Feb–Mar 1992)</th>
-<td id="T_58d02_row0_col0" class="data row0 col0">20.34</td>
-<td id="T_58d02_row0_col1" class="data row0 col1">23.38</td>
-<td id="T_58d02_row0_col2" class="data row0 col2">-3.04</td>
+<th id="T_afe7b_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Wave 1 (before, Feb–Mar 1992)</th>
+<td id="T_afe7b_row0_col0" class="data row0 col0">20.34</td>
+<td id="T_afe7b_row0_col1" class="data row0 col1">23.38</td>
+<td id="T_afe7b_row0_col2" class="data row0 col2">-3.04</td>
 </tr>
 <tr class="even">
-<th id="T_58d02_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Wave 2 (after, Nov–Dec 1992)</th>
-<td id="T_58d02_row1_col0" class="data row1 col0">18.81</td>
-<td id="T_58d02_row1_col1" class="data row1 col1">19.73</td>
-<td id="T_58d02_row1_col2" class="data row1 col2">-0.92</td>
+<th id="T_afe7b_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Wave 2 (after, Nov–Dec 1992)</th>
+<td id="T_afe7b_row1_col0" class="data row1 col0">18.81</td>
+<td id="T_afe7b_row1_col1" class="data row1 col1">19.73</td>
+<td id="T_afe7b_row1_col2" class="data row1 col2">-0.92</td>
 </tr>
 <tr class="odd">
-<th id="T_58d02_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Change (Wave 2 − Wave 1)</th>
-<td id="T_58d02_row2_col0" class="data row2 col0">-1.53</td>
-<td id="T_58d02_row2_col1" class="data row2 col1">-3.65</td>
-<td id="T_58d02_row2_col2" class="data row2 col2">2.12</td>
+<th id="T_afe7b_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Change (Wave 2 − Wave 1)</th>
+<td id="T_afe7b_row2_col0" class="data row2 col0">-1.53</td>
+<td id="T_afe7b_row2_col1" class="data row2 col1">-3.65</td>
+<td id="T_afe7b_row2_col2" class="data row2 col2">2.12</td>
 </tr>
 </tbody>
 </table>
@@ -544,7 +544,7 @@ Table&nbsp;2: Table 3: Mean FTE Employment Before and After the NJ Minimum Wage 
 <li><span class="math inline">\(\beta_2\)</span> = time trend in PA (the counterfactual change)</li>
 <li><span class="math inline">\(\delta\)</span> = the <strong>DiD estimate</strong> — the causal effect of the minimum wage on NJ employment</li>
 </ul>
-<div id="45dc0686" class="cell" data-execution_count="4">
+<div id="6dcd0eb0" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reshape to long (person-period) format</span></span>
@@ -604,33 +604,33 @@ Table&nbsp;2: Table 3: Mean FTE Employment Before and After the NJ Minimum Wage 
 </details>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <style type="text/css">
-#T_ce6ed caption {
+#T_ba03e caption {
   font-weight: bold;
   font-size: 1.05em;
 }
-#T_ce6ed th {
+#T_ba03e th {
   background-color: #f0f0f0;
 }
-#T_ce6ed_row3_col0, #T_ce6ed_row3_col1, #T_ce6ed_row3_col2, #T_ce6ed_row3_col3 {
+#T_ba03e_row3_col0, #T_ba03e_row3_col1, #T_ba03e_row3_col2, #T_ba03e_row3_col3 {
   font-weight: bold;
   background-color: #fffde7;
 }
 </style>
 
-<div id="T_ce6ed" class="quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true">
+<div id="T_ba03e" class="quarto-float quarto-figure quarto-figure-center anchored" data-quarto-postprocess="true">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_ce6ed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="T_ba03e-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;3: Table 4, Column (i): OLS Difference-in-Differences Regression
 </figcaption>
-<div aria-describedby="T_ce6ed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table id="T_ce6ed" class="caption-top table table-sm table-striped small">
+<div aria-describedby="T_ba03e-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="T_ba03e" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_ce6ed_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Coefficient</th>
-<th id="T_ce6ed_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Std. Error</th>
-<th id="T_ce6ed_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Paper Coef.</th>
-<th id="T_ce6ed_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Paper SE</th>
+<th id="T_ba03e_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Coefficient</th>
+<th id="T_ba03e_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Std. Error</th>
+<th id="T_ba03e_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Paper Coef.</th>
+<th id="T_ba03e_level0_col3" class="col_heading level0 col3" data-quarto-table-cell-role="th">Paper SE</th>
 </tr>
 <tr class="even">
 <th class="index_name level0" data-quarto-table-cell-role="th">Variable</th>
@@ -642,32 +642,32 @@ Table&nbsp;3: Table 4, Column (i): OLS Difference-in-Differences Regression
 </thead>
 <tbody>
 <tr class="odd">
-<th id="T_ce6ed_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Intercept (PA, wave 1)</th>
-<td id="T_ce6ed_row0_col0" class="data row0 col0">23.38***</td>
-<td id="T_ce6ed_row0_col1" class="data row0 col1">(1.16)</td>
-<td id="T_ce6ed_row0_col2" class="data row0 col2">23.33</td>
-<td id="T_ce6ed_row0_col3" class="data row0 col3">(1.35)</td>
+<th id="T_ba03e_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Intercept (PA, wave 1)</th>
+<td id="T_ba03e_row0_col0" class="data row0 col0">23.38***</td>
+<td id="T_ba03e_row0_col1" class="data row0 col1">(1.16)</td>
+<td id="T_ba03e_row0_col2" class="data row0 col2">23.33</td>
+<td id="T_ba03e_row0_col3" class="data row0 col3">(1.35)</td>
 </tr>
 <tr class="even">
-<th id="T_ce6ed_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">New Jersey (1 = NJ)</th>
-<td id="T_ce6ed_row1_col0" class="data row1 col0">-3.04**</td>
-<td id="T_ce6ed_row1_col1" class="data row1 col1">(1.29)</td>
-<td id="T_ce6ed_row1_col2" class="data row1 col2">-2.89</td>
-<td id="T_ce6ed_row1_col3" class="data row1 col3">(1.69)</td>
+<th id="T_ba03e_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">New Jersey (1 = NJ)</th>
+<td id="T_ba03e_row1_col0" class="data row1 col0">-3.04**</td>
+<td id="T_ba03e_row1_col1" class="data row1 col1">(1.29)</td>
+<td id="T_ba03e_row1_col2" class="data row1 col2">-2.89</td>
+<td id="T_ba03e_row1_col3" class="data row1 col3">(1.69)</td>
 </tr>
 <tr class="odd">
-<th id="T_ce6ed_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Post (1 = wave 2)</th>
-<td id="T_ce6ed_row2_col0" class="data row2 col0">-3.65**</td>
-<td id="T_ce6ed_row2_col1" class="data row2 col1">(1.65)</td>
-<td id="T_ce6ed_row2_col2" class="data row2 col2">-2.16</td>
-<td id="T_ce6ed_row2_col3" class="data row2 col3">(1.25)</td>
+<th id="T_ba03e_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">Post (1 = wave 2)</th>
+<td id="T_ba03e_row2_col0" class="data row2 col0">-3.65**</td>
+<td id="T_ba03e_row2_col1" class="data row2 col1">(1.65)</td>
+<td id="T_ba03e_row2_col2" class="data row2 col2">-2.16</td>
+<td id="T_ba03e_row2_col3" class="data row2 col3">(1.25)</td>
 </tr>
 <tr class="even">
-<th id="T_ce6ed_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">NJ × Post [DiD estimate]</th>
-<td id="T_ce6ed_row3_col0" class="data row3 col0">2.12</td>
-<td id="T_ce6ed_row3_col1" class="data row3 col1">(1.83)</td>
-<td id="T_ce6ed_row3_col2" class="data row3 col2">2.75</td>
-<td id="T_ce6ed_row3_col3" class="data row3 col3">(1.64)</td>
+<th id="T_ba03e_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">NJ × Post [DiD estimate]</th>
+<td id="T_ba03e_row3_col0" class="data row3 col0">2.12</td>
+<td id="T_ba03e_row3_col1" class="data row3 col1">(1.83)</td>
+<td id="T_ba03e_row3_col2" class="data row3 col2">2.75</td>
+<td id="T_ba03e_row3_col3" class="data row3 col3">(1.64)</td>
 </tr>
 </tbody>
 </table>
@@ -684,7 +684,7 @@ Table&nbsp;3: Table 4, Column (i): OLS Difference-in-Differences Regression
 <section id="additional-analysis-visualizing-parallel-trends" class="level2">
 <h2 class="anchored" data-anchor-id="additional-analysis-visualizing-parallel-trends">Additional Analysis: Visualizing Parallel Trends</h2>
 <p>The paper presents these results only in tables. Below I visualize the same information as a <strong>parallel trends plot</strong> — the standard way to assess the key identifying assumption of DiD.</p>
-<div id="f75531f0" class="cell" data-fig-height="5" data-fig-width="8" data-execution_count="5">
+<div id="e7642ab0" class="cell" data-fig-height="5" data-fig-width="8" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
@@ -779,6 +779,93 @@ Table&nbsp;3: Table 4, Column (i): OLS Difference-in-Differences Regression
 </section>
 
 </main> <!-- /main -->
+<script>
+(function () {
+  var EN_TO_JP = {
+    'index.html': 'index_jp.html',
+    'resume.html': 'resume_jp.html',
+    'projects.html': 'projects_jp.html',
+    'blog.html': 'blog.html',
+    'projects/project1/index.html': 'projects_jp/project1/index.html',
+    'projects/project2/index.html': 'projects_jp/project2/index.html',
+    'blogs/card-krueger.html': 'blogs/card-krueger.html',
+    'blogs/hw3_questions.html': 'blogs/hw3_questions.html',
+    'blogs/hw4_questions.html': 'blogs/hw4_questions.html'
+  };
+
+  var JP_TO_EN = {
+    'index_jp.html': 'index.html',
+    'resume_jp.html': 'resume.html',
+    'projects_jp.html': 'projects.html',
+    'projects_jp/project1/index.html': 'projects/project1/index.html',
+    'projects_jp/project2/index.html': 'projects/project2/index.html'
+  };
+
+  function detectPage(path) {
+    if (path.endsWith('/')) path = path + 'index.html';
+    var enKey, jpKey, base;
+    for (enKey in EN_TO_JP) {
+      if (path.endsWith('/' + enKey)) {
+        base = path.slice(0, path.length - enKey.length);
+        return { lang: 'en', enHref: path, jpHref: base + EN_TO_JP[enKey] };
+      }
+    }
+    for (jpKey in JP_TO_EN) {
+      if (path.endsWith('/' + jpKey)) {
+        base = path.slice(0, path.length - jpKey.length);
+        return { lang: 'jp', enHref: base + JP_TO_EN[jpKey], jpHref: path };
+      }
+    }
+    return { lang: 'en', enHref: path, jpHref: path };
+  }
+
+  var page = detectPage(window.location.pathname);
+  var savedLang = localStorage.getItem('site-lang');
+
+  if (savedLang && savedLang !== page.lang) {
+    var target = savedLang === 'jp' ? page.jpHref : page.enHref;
+    if (target && target !== window.location.pathname) {
+      window.location.replace(target);
+    }
+  }
+
+  var lang = savedLang || page.lang;
+
+  function inject() {
+    var collapse = document.getElementById('navbarCollapse');
+    if (!collapse) return;
+
+    var label = lang === 'jp' ? '🇯🇵 JP' : '🇺🇸 EN';
+    var ul = document.createElement('ul');
+    ul.className = 'navbar-nav ms-auto lang-switcher-nav';
+    ul.innerHTML =
+      '<li class="nav-item dropdown">' +
+        '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">' +
+          label +
+        '</a>' +
+        '<ul class="dropdown-menu dropdown-menu-end">' +
+          '<li><a class="dropdown-item' + (lang === 'en' ? ' active' : '') + '" id="lang-en" href="' + page.enHref + '">🇺🇸 English</a></li>' +
+          '<li><a class="dropdown-item' + (lang === 'jp' ? ' active' : '') + '" id="lang-jp" href="' + page.jpHref + '">🇯🇵 日本語</a></li>' +
+        '</ul>' +
+      '</li>';
+
+    collapse.appendChild(ul);
+
+    document.getElementById('lang-en').addEventListener('click', function () {
+      localStorage.setItem('site-lang', 'en');
+    });
+    document.getElementById('lang-jp').addEventListener('click', function () {
+      localStorage.setItem('site-lang', 'jp');
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', inject);
+  } else {
+    inject();
+  }
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

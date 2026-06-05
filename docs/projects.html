@@ -230,7 +230,7 @@ Feb 1, 2026
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="1" data-listing-date-sort="NaN" data-listing-file-modified-sort="1779086071529" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="348">
+<div class="g-col-1" data-index="1" data-listing-date-sort="NaN" data-listing-file-modified-sort="1780628226532" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="346">
 <a href="./projects/project2/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
@@ -255,6 +255,93 @@ Invalid Date
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
 </div></main> <!-- /main -->
+<script>
+(function () {
+  var EN_TO_JP = {
+    'index.html': 'index_jp.html',
+    'resume.html': 'resume_jp.html',
+    'projects.html': 'projects_jp.html',
+    'blog.html': 'blog.html',
+    'projects/project1/index.html': 'projects_jp/project1/index.html',
+    'projects/project2/index.html': 'projects_jp/project2/index.html',
+    'blogs/card-krueger.html': 'blogs/card-krueger.html',
+    'blogs/hw3_questions.html': 'blogs/hw3_questions.html',
+    'blogs/hw4_questions.html': 'blogs/hw4_questions.html'
+  };
+
+  var JP_TO_EN = {
+    'index_jp.html': 'index.html',
+    'resume_jp.html': 'resume.html',
+    'projects_jp.html': 'projects.html',
+    'projects_jp/project1/index.html': 'projects/project1/index.html',
+    'projects_jp/project2/index.html': 'projects/project2/index.html'
+  };
+
+  function detectPage(path) {
+    if (path.endsWith('/')) path = path + 'index.html';
+    var enKey, jpKey, base;
+    for (enKey in EN_TO_JP) {
+      if (path.endsWith('/' + enKey)) {
+        base = path.slice(0, path.length - enKey.length);
+        return { lang: 'en', enHref: path, jpHref: base + EN_TO_JP[enKey] };
+      }
+    }
+    for (jpKey in JP_TO_EN) {
+      if (path.endsWith('/' + jpKey)) {
+        base = path.slice(0, path.length - jpKey.length);
+        return { lang: 'jp', enHref: base + JP_TO_EN[jpKey], jpHref: path };
+      }
+    }
+    return { lang: 'en', enHref: path, jpHref: path };
+  }
+
+  var page = detectPage(window.location.pathname);
+  var savedLang = localStorage.getItem('site-lang');
+
+  if (savedLang && savedLang !== page.lang) {
+    var target = savedLang === 'jp' ? page.jpHref : page.enHref;
+    if (target && target !== window.location.pathname) {
+      window.location.replace(target);
+    }
+  }
+
+  var lang = savedLang || page.lang;
+
+  function inject() {
+    var collapse = document.getElementById('navbarCollapse');
+    if (!collapse) return;
+
+    var label = lang === 'jp' ? '🇯🇵 JP' : '🇺🇸 EN';
+    var ul = document.createElement('ul');
+    ul.className = 'navbar-nav ms-auto lang-switcher-nav';
+    ul.innerHTML =
+      '<li class="nav-item dropdown">' +
+        '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">' +
+          label +
+        '</a>' +
+        '<ul class="dropdown-menu dropdown-menu-end">' +
+          '<li><a class="dropdown-item' + (lang === 'en' ? ' active' : '') + '" id="lang-en" href="' + page.enHref + '">🇺🇸 English</a></li>' +
+          '<li><a class="dropdown-item' + (lang === 'jp' ? ' active' : '') + '" id="lang-jp" href="' + page.jpHref + '">🇯🇵 日本語</a></li>' +
+        '</ul>' +
+      '</li>';
+
+    collapse.appendChild(ul);
+
+    document.getElementById('lang-en').addEventListener('click', function () {
+      localStorage.setItem('site-lang', 'en');
+    });
+    document.getElementById('lang-jp').addEventListener('click', function () {
+      localStorage.setItem('site-lang', 'jp');
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', inject);
+  } else {
+    inject();
+  }
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
