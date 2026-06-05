@@ -1,57 +1,55 @@
 ---
-title: "Optimizing Wage Outcomes with Snowflake & Python"
+title: "SnowflakeとPythonによる賃金最適化"
 author: Leia Kawamura
-date: 07/2025
+date: 2025年7月
 ---
 
-# Project Overview
+# プロジェクト概要
 
-This project demonstrates the design and implementation of a scalable, cloud-based data pipeline using **Snowflake** and **Python** to analyze wage trends across industries and geographic regions. The objective was to identify high-opportunity industry-location combinations and support data-driven decision-making.
+このプロジェクトでは、**Snowflake** と **Python** を用いたスケーラブルなクラウドベースのデータパイプラインを設計・実装し、産業別・地域別の賃金トレンドを分析しました。目的は、高機会の産業×地域の組み合わせを特定し、データに基づいた意思決定を支援することです。
 
-By leveraging modern data engineering and analytics techniques, the project delivered actionable insights that contributed to a **10% improvement in wage outcomes**.
-
----
-
-# Architecture & Tools
-
-- **Cloud Data Warehouse:** Snowflake
-- **Programming Language:** Python
-- **Data Access:** Snowflake Connector for Python
-- **Query Language:** SQL
-- **Concepts Applied:** ETL pipelines, Location Quotient (LQ), data modeling, exploratory analysis
+最新のデータエンジニアリングと分析技術を活用した結果、**賃金アウトカムの10%改善**に貢献する実用的なインサイトを提供しました。
 
 ---
 
-# Data Pipeline Design
+# 使用技術・ツール
 
-An end-to-end pipeline was engineered to:
-
-1. Establish a secure connection to Snowflake
-2. Provision a **Virtual Warehouse** for compute scalability
-3. Create and manage a structured **database schema**
-4. Ingest and transform wage-related datasets
-5. Enable efficient querying for downstream analysis
-
-This architecture ensures **high performance, scalability, and cost-efficient compute usage**.
+- **クラウドデータウェアハウス：** Snowflake
+- **プログラミング言語：** Python
+- **データアクセス：** Snowflake Connector for Python
+- **クエリ言語：** SQL
+- **適用概念：** ETLパイプライン、立地係数（LQ）、データモデリング、探索的分析
 
 ---
 
-# Analytical Approach
+# データパイプラインの設計
 
-The analysis focused on identifying wage disparities using **Location Quotient (LQ)** metrics. This method compares the concentration of wages in a specific industry and region against a broader benchmark.
+エンドツーエンドのパイプラインを構築し、以下を実現しました：
 
-Key steps included:
-- Aggregating wage data across industries and locations
-- Calculating LQ to identify high-growth or underrepresented sectors
-- Ranking industry-location pairs based on wage potential
+1. Snowflakeへの安全な接続の確立
+2. 計算スケーラビリティのための**仮想ウェアハウス**のプロビジョニング
+3. 構造化された**データベーススキーマ**の作成・管理
+4. 賃金関連データセットの取り込みと変換
+5. 下流分析のための効率的なクエリの実現
+
+このアーキテクチャにより、**高いパフォーマンス・スケーラビリティ・コスト効率の高い計算処理**を実現しています。
 
 ---
 
-# Sample Query
+# 分析アプローチ
 
-```{r}
-#| message: false
+分析では、**立地係数（LQ）** 指標を用いて賃金格差を特定することに焦点を当てました。この手法は、特定の産業・地域における賃金の集中度を、より広範なベンチマークと比較するものです。
 
+主なステップは以下の通りです：
+- 産業・地域をまたいだ賃金データの集計
+- LQの算出による高成長または過小評価されたセクターの特定
+- 賃金ポテンシャルに基づく産業×地域ペアのランキング
+
+---
+
+# サンプルクエリ
+
+```{.r}
 library(DBI)
 library(odbc)
 
@@ -74,3 +72,4 @@ LIMIT 10;
 
 results <- dbGetQuery(con, query)
 results
+```

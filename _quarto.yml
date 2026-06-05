@@ -5,6 +5,10 @@ project:
     - "*.qmd"
     - "blogs/*.qmd"
     - "projects/*.qmd"
+    - "projects/project1/*.qmd"
+    - "projects/project2/*.qmd"
+    - "projects_jp/project1/*.qmd"
+    - "projects_jp/project2/*.qmd"
     - "!posts_bak/"
 
 website:
@@ -25,7 +29,6 @@ format:
     theme:
       - cosmo
       - brand
-
-
     css: styles.css
     toc: true
+    include-after-body: lang-switch.html

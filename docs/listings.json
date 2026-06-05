@@ -1,22 +1,10 @@
 [
   {
-    "listing": "/blog.html",
-    "items": [
-      "/blogs/hw4_questions.html",
-      "/blogs/hw3_questions.html",
-      "/blogs/card-krueger.html"
-    ]
-  },
-  {
     "listing": "/projects_jp.html",
     "items": [
-      "/projects/project1/index.html",
-      "/projects/project2/index.html"
+      "/projects_jp/project2/index.html",
+      "/projects_jp/project1/index.html"
     ]
-  },
-  {
-    "listing": "/blog/index.html",
-    "items": []
   },
   {
     "listing": "/projects.html",

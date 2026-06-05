@@ -43,5 +43,14 @@
   },
   "projects_jp/project2/index.qmd": {
     "index.html": "4f08644c"
+  },
+  "blogs/card-krueger.qmd": {
+    "card-krueger.html": "34b02710"
+  },
+  "blogs/hw3_questions.qmd": {
+    "hw3_questions.html": "0d9239c7"
+  },
+  "blogs/hw4_questions.qmd": {
+    "hw4_questions.html": "ac180d5c"
   }
 }

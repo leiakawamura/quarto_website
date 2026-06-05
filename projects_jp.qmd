@@ -1,6 +1,6 @@
 ---
 title: "My Projects"
 listing:
-  contents: projects
+  contents: projects_jp
   type: grid
 ---

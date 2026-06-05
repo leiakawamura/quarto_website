@@ -1,18 +1,13 @@
 {
   "listingMap": {
+    "blog.qmd": [
+      "blogs"
+    ],
     "projects_jp.qmd": [
-      "projects"
+      "projects_jp"
     ],
     "projects.qmd": [
       "projects"
-    ],
-    "blog.qmd": [
-      "posts",
-      "blogs"
-    ],
-    "blog/index.qmd": [
-      ".",
-      "posts"
     ]
   }
 }

@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multilingual Quarto Website — Leia Kawamura</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fff8f0;
+    --latte: #efe2d3;
+    --coffee: #8b5e3c;
+    --coffee-dark: #5c3a21;
+    --mocha: #2a1b12;
+    --sakura-light: #fde8ef;
+    --sakura: #f5b8d0;
+    --sakura-deep: #e87fa8;
+    --sakura-dark: #c1527a;
+    --border: #e3d2c0;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--mocha);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    cursor: default;
+  }
+
+  /* ── Cherry Blossom Canvas ── */
+  #petal-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* ── Slide Container ── */
+  .deck {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.7s ease;
+    padding: 60px;
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* ── Navigation ── */
+  .nav-dots {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 200;
+  }
+
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 1.5px solid rgba(255,255,255,0.5);
+  }
+  .dot.active { background: var(--sakura); border-color: var(--sakura); transform: scale(1.3); }
+
+  .nav-arrow {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    z-index: 200;
+    font-size: 18px;
+    backdrop-filter: blur(8px);
+    transition: all 0.2s;
+  }
+  .nav-arrow:hover { background: rgba(245,184,208,0.3); border-color: var(--sakura); }
+  .nav-arrow.prev { left: 20px; }
+  .nav-arrow.next { right: 20px; }
+
+  .slide-counter {
+    position: fixed;
+    top: 24px;
+    right: 30px;
+    color: rgba(255,255,255,0.4);
+    font-size: 12px;
+    letter-spacing: 2px;
+    z-index: 200;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* ══════════════════════════════════════
+     SLIDE 1 — TITLE
+  ══════════════════════════════════════ */
+  #slide-1 {
+    background: linear-gradient(160deg, #2a1b12 0%, #1a0e08 60%, #2d1520 100%);
+    text-align: center;
+  }
+
+  .s1-kana {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 13px;
+    letter-spacing: 6px;
+    color: var(--sakura);
+    opacity: 0.7;
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s 0.2s both;
+  }
+
+  .s1-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5.5vw, 68px);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.15;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.4s both;
+  }
+  .s1-title em {
+    font-style: italic;
+    color: var(--sakura);
+  }
+
+  .s1-sub {
+    font-size: 14px;
+    color: rgba(239,226,211,0.6);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+    animation: fadeUp 0.8s 0.6s both;
+  }
+
+  .s1-author {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 16px;
+    color: var(--latte);
+    animation: fadeUp 0.8s 0.8s both;
+  }
+  .s1-author span {
+    color: var(--sakura-deep);
+  }
+
+  .s1-deco {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--sakura-deep), transparent);
+    animation: fadeIn 1.2s 1s both;
+  }
+
+  /* ══════════════════════════════════════
+     SLIDE 2 — OPENING HOOK
+  ══════════════════════════════════════ */
+  #slide-2 {
+    background: var(--cream);
+  }
+
+  .s2-bg-text {
+    position: absolute;
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(80px, 14vw, 180px);
+    color: rgba(139,94,60,0.06);
+    font-weight: 700;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .s2-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+  }
+
+  .s2-question {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 400;
+    color: var(--coffee-dark);
+    line-height: 1.3;
+    margin-bottom: 40px;
+    animation: fadeUp 0.7s 0.1s both;
+  }
+  .s2-question em { font-style: italic; color: var(--sakura-dark); }
+
+  .stat-row {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.3s both;
+  }
+
+  .stat-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 36px;
+    text-align: center;
+    box-shadow: 0 4px 24px rgba(92,58,33,0.08);
+    min-width: 180px;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 600;
+    color: var(--sakura-dark);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--coffee);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 6px;
+    display: block;
+  }
+
+  .s2-insight {
+    margin-top: 36px;
+    font-size: 15px;
+    color: var(--coffee);
+    line-height: 1.7;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeUp 0.7s 0.5s both;
+  }
+
+  /* ══════════════════════════════════════
+     SLIDE 3 — THE MARKETING ANGLE
+  ══════════════════════════════════════ */
+  #slide-3 {
+    background: linear-gradient(135deg, #2a1b12 0%, #3d1f28 100%);
+  }
+
+  .s3-label {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--sakura);
+    margin-bottom: 20px;
+    animation: fadeUp 0.6s 0.1s both;
+  }
+
+  .s3-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(26px, 3.8vw, 46px);
+    color: var(--cream);
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 48px;
+    max-width: 700px;
+    line-height: 1.3;
+    animation: fadeUp 0.6s 0.2s both;
+  }
+  .s3-title strong { color: var(--sakura); font-weight: 600; }
+
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 860px;
+    animation: fadeUp 0.7s 0.4s both;
+  }
+
+  .pillar {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(245,184,208,0.2);
+    border-radius: 14px;
+    padding: 28px 24px;
+    text-align: center;
+    backdrop-filter: blur(8px);
+  }
+
+  .pillar-icon {
+    font-size: 30px;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .pillar-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--sakura-light);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .pillar-desc {
+    font-size: 12.5px;
+    color: rgba(239,226,211,0.6);
+    line-height: 1.6;
+  }
+
+  /* ══════════════════════════════════════
+     SLIDE 4 — LIVE DEMO
+  ══════════════════════════════════════ */
+  #slide-4 {
+    background: var(--latte);
+  }
+
+  .s4-content {
+    text-align: center;
+    max-width: 760px;
+  }
+
+  .s4-tag {
+    display: inline-block;
+    background: var(--sakura);
+    color: white;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s 0.1s both;
+  }
+
+  .s4-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 54px);
+    color: var(--coffee-dark);
+    font-weight: 300;
+    margin-bottom: 20px;
+    animation: fadeUp 0.6s 0.2s both;
+  }
+
+  .s4-desc {
+    font-size: 15px;
+    color: var(--coffee);
+    line-height: 1.8;
+    margin-bottom: 40px;
+    animation: fadeUp 0.6s 0.3s both;
+  }
+
+  .browser-mock {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 40px rgba(92,58,33,0.15);
+    overflow: hidden;
+    animation: fadeUp 0.7s 0.4s both;
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .browser-bar {
+    background: #f0f0f0;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .bd-r { background: #ff5f57; }
+  .bd-y { background: #ffbd2e; }
+  .bd-g { background: #28c840; }
+
+  .browser-url {
+    flex: 1;
+    background: white;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: #666;
+    margin-left: 8px;
+  }
+
+  .browser-body {
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .browser-nav {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: var(--coffee);
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .browser-nav span:last-child {
+    margin-left: auto;
+    background: var(--sakura-light);
+    color: var(--sakura-dark);
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+
+  .browser-left { flex: 1; }
+  .browser-avatar {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sakura-light), var(--sakura));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .browser-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--coffee-dark);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .browser-name-jp {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 13px;
+    color: var(--coffee);
+    margin-bottom: 12px;
+  }
+  .browser-chips {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .chip-mock {
+    font-size: 10px;
+    background: var(--latte);
+    color: var(--coffee);
+    padding: 3px 10px;
+    border-radius: 10px;
+  }
+
+  /* ══════════════════════════════════════
+     SLIDE 5 — HOW TO BUILD IT
+  ══════════════════════════════════════ */
+  #slide-5 {
+    background: #1a0e08;
+    align-items: flex-start;
+    padding: 52px 64px;
+  }
+
+  .s5-header {
+    margin-bottom: 32px;
+    animation: fadeUp 0.6s 0.1s both;
+  }
+  .s5-label {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--sakura);
+    margin-bottom: 8px;
+  }
+  .s5-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 3vw, 38px);
+    color: var(--cream);
+    font-weight: 300;
+  }
+
+  .steps-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    width: 100%;
+    animation: fadeUp 0.7s 0.3s both;
+  }
+
+  .steps-col { display: flex; flex-direction: column; gap: 14px; }
+
+  .step-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .step-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--sakura-dark);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-text strong {
+    display: block;
+    color: var(--latte);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+  .step-text span {
+    font-size: 12px;
+    color: rgba(239,226,211,0.5);
+  }
+
+  .code-block {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(245,184,208,0.15);
+    border-radius: 10px;
+    padding: 18px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 11.5px;
+    color: #d4c5b8;
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+  .code-block .c-key { color: var(--sakura); }
+  .code-block .c-val { color: #a8d8a8; }
+  .code-block .c-str { color: #f0c080; }
+  .code-block .c-comment { color: rgba(200,180,160,0.4); }
+
+  /* ══════════════════════════════════════
+     SLIDE 6 — LANG SWITCH CODE
+  ══════════════════════════════════════ */
+  #slide-6 {
+    background: #1a0e08;
+    align-items: flex-start;
+    padding: 52px 64px;
+  }
+
+  .s6-header {
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s 0.1s both;
+    width: 100%;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    width: 100%;
+    animation: fadeUp 0.7s 0.3s both;
+  }
+
+  .code-panel {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(245,184,208,0.12);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .code-panel-header {
+    background: rgba(245,184,208,0.1);
+    padding: 10px 18px;
+    font-size: 11px;
+    color: var(--sakura);
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .file-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--sakura-dark);
+  }
+  .code-inner {
+    padding: 16px 18px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: #c8b8a8;
+    line-height: 1.75;
+    overflow: auto;
+    max-height: 320px;
+  }
+  .c-pink { color: var(--sakura); }
+  .c-green { color: #a8d8a8; }
+  .c-yellow { color: #f0c080; }
+  .c-gray { color: rgba(200,180,160,0.4); }
+  .c-blue { color: #a8c8f0; }
+
+  .explained-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px 0;
+  }
+  .explained-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .e-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .e-text strong {
+    display: block;
+    color: var(--latte);
+    font-size: 13px;
+    margin-bottom: 3px;
+  }
+  .e-text span {
+    font-size: 11.5px;
+    color: rgba(239,226,211,0.5);
+    line-height: 1.5;
+  }
+
+  /* ══════════════════════════════════════
+     SLIDE 7 — TEMPLATE / CTA
+  ══════════════════════════════════════ */
+  #slide-7 {
+    background: linear-gradient(160deg, #2d1520 0%, #2a1b12 100%);
+    text-align: center;
+  }
+
+  .s7-emoji { font-size: 52px; margin-bottom: 20px; animation: fadeUp 0.6s 0.1s both; }
+
+  .s7-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 16px;
+    animation: fadeUp 0.6s 0.2s both;
+  }
+  .s7-title strong { color: var(--sakura); font-style: italic; }
+
+  .s7-desc {
+    font-size: 14px;
+    color: rgba(239,226,211,0.6);
+    margin-bottom: 44px;
+    max-width: 520px;
+    line-height: 1.7;
+    animation: fadeUp 0.6s 0.3s both;
+  }
+
+  .template-cards {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 44px;
+    animation: fadeUp 0.7s 0.4s both;
+  }
+  .t-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(245,184,208,0.25);
+    border-radius: 14px;
+    padding: 22px 28px;
+    text-align: left;
+    min-width: 200px;
+    backdrop-filter: blur(6px);
+  }
+  .t-card-icon { font-size: 24px; margin-bottom: 10px; }
+  .t-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: var(--sakura-light);
+    margin-bottom: 6px;
+  }
+  .t-card-desc {
+    font-size: 11.5px;
+    color: rgba(239,226,211,0.5);
+    line-height: 1.6;
+  }
+
+  .s7-cta {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2.5vw, 28px);
+    font-style: italic;
+    color: var(--sakura);
+    animation: fadeUp 0.6s 0.6s both;
+  }
+
+  .s7-name {
+    margin-top: 32px;
+    font-size: 12px;
+    color: rgba(239,226,211,0.3);
+    letter-spacing: 3px;
+    animation: fadeUp 0.6s 0.7s both;
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ── Keyboard hint ── */
+  .key-hint {
+    position: fixed;
+    bottom: 60px;
+    right: 28px;
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 1.5px;
+    z-index: 200;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="petal-canvas"></canvas>
+
+<!-- Nav -->
+<div class="nav-dots" id="nav-dots"></div>
+<button class="nav-arrow prev" onclick="changeSlide(-1)">&#8592;</button>
+<button class="nav-arrow next" onclick="changeSlide(1)">&#8594;</button>
+<div class="slide-counter" id="counter">1 / 7</div>
+<div class="key-hint">← → KEYS TO NAVIGATE</div>
+
+<div class="deck">
+
+  <!-- SLIDE 1: Title -->
+  <div class="slide active" id="slide-1">
+    <div class="s1-kana">多言語ウェブサイト &nbsp;·&nbsp; MULTILINGUAL WEBSITE</div>
+    <h1 class="s1-title">
+      Speaking Your Audience's<br>
+      <em>Language</em>
+    </h1>
+    <p class="s1-sub">Adding a Language Switcher to Your Quarto Website</p>
+    <p class="s1-author">Leia Kawamura &nbsp;<span>·</span>&nbsp; Marketing Class Presentation</p>
+    <div class="s1-deco"></div>
+  </div>
+
+  <!-- SLIDE 2: Hook -->
+  <div class="slide" id="slide-2">
+    <div class="s2-bg-text">言語</div>
+    <div class="s2-content">
+      <h2 class="s2-question">
+        How many of you speak<br>
+        <em>more than one language?</em>
+      </h2>
+      <div class="stat-row">
+        <div class="stat-card">
+          <span class="stat-num">+20%</span>
+          <span class="stat-label">Salary premium<br>for bilinguals</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">5.4B</span>
+          <span class="stat-label">Non-English<br>internet users</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">72%</span>
+          <span class="stat-label">Prefer content<br>in native language</span>
+        </div>
+      </div>
+      <p class="s2-insight">
+        Language isn't just vocabulary — it's culture, trust, and connection. 
+        You can study for a year and reach a basic level, but knowing a language 
+        for daily use is completely different from knowing it alongside its culture.
+        That fluency is something recruiters <em>notice</em>.
+      </p>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: Marketing Angle -->
+  <div class="slide" id="slide-3">
+    <div class="s3-label">The Marketing Perspective</div>
+    <h2 class="s3-title">
+      Your personal website is a<br>
+      <strong>brand</strong> — and right now,<br>
+      it only speaks to half the room.
+    </h2>
+    <div class="pillar-grid">
+      <div class="pillar">
+        <span class="pillar-icon">🌏</span>
+        <div class="pillar-title">Reach</div>
+        <p class="pillar-desc">Expand beyond English-speaking recruiters to global companies, Japanese firms, and international opportunities.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">✨</span>
+        <div class="pillar-title">Differentiation</div>
+        <p class="pillar-desc">Every classmate has nearly the same Quarto site. A multilingual version immediately stands out.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">🤝</span>
+        <div class="pillar-title">Accessibility</div>
+        <p class="pillar-desc">Making your content available in someone's native language signals respect — that's a brand value, not just a feature.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: Demo Placeholder -->
+  <div class="slide" id="slide-4">
+    <div class="s4-content">
+      <span class="s4-tag">🌸 Live Demo</span>
+      <h2 class="s4-title">Let me show you<br>my actual website</h2>
+      <p class="s4-desc">
+        Here you'll see the English and Japanese versions side by side —<br>
+        same structure, same pages, different language and cultural framing.
+      </p>
+      <div class="browser-mock">
+        <div class="browser-bar">
+          <div class="browser-dot bd-r"></div>
+          <div class="browser-dot bd-y"></div>
+          <div class="browser-dot bd-g"></div>
+          <div class="browser-url">leiakawamura.github.io</div>
+          <div style="font-size:11px; color:#888; background:#f5e8f0; padding:2px 10px; border-radius:8px; margin-left:6px;">🇺🇸 EN ▾</div>
+        </div>
+        <div class="browser-body" style="flex-direction:column; align-items:flex-start;">
+          <div class="browser-nav">
+            <span style="font-weight:600; color:var(--coffee-dark)">Leia Kawamura</span>
+            <span>Home</span><span>Resume</span><span>Projects</span><span>Blogs</span>
+            <span>🇯🇵 JP</span>
+          </div>
+          <div style="display:flex; gap:20px; align-items:center; width:100%;">
+            <div class="browser-avatar">🌸</div>
+            <div class="browser-left">
+              <div class="browser-name">Hello, my name is Leia Kawamura</div>
+              <div class="browser-name-jp">河村玲采 — かわむられいあ</div>
+              <div class="browser-chips">
+                <span class="chip-mock">Marketing Analytics</span>
+                <span class="chip-mock">Customer Insights</span>
+                <span class="chip-mock">Coffee Industry</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: How to Build -->
+  <div class="slide" id="slide-5">
+    <div class="s5-header">
+      <div class="s5-label">STEP BY STEP</div>
+      <h2 class="s5-title">How to Build It — File Structure</h2>
+    </div>
+    <div class="steps-layout">
+      <div class="steps-col">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <strong>Duplicate your .qmd pages</strong>
+            <span>Copy each page you want translated</span>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <strong>Rename with language code</strong>
+            <span>index.qmd → index_jp.qmd<br>projects.qmd → projects_jp.qmd</span>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <strong>Translate the content</strong>
+            <span>Titles, body text, chip labels — everything visible</span>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-text">
+            <strong>Register in _quarto.yml</strong>
+            <span>Add JP pages to the render list</span>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">5</div>
+          <div class="step-text">
+            <strong>Add the language switcher</strong>
+            <span>include-after-body: lang-switch.html</span>
+          </div>
+        </div>
+      </div>
+      <div class="code-block">
+        <span class="c-comment"># _quarto.yml — render list</span><br>
+        project:<br>
+        &nbsp;&nbsp;<span class="c-key">render</span>:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;- <span class="c-str">"*.qmd"</span> &nbsp;<span class="c-comment"># all top-level</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;- <span class="c-str">"blogs/*.qmd"</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;- <span class="c-str">"projects/*.qmd"</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;- <span class="c-str">"projects_jp/*.qmd"</span><br><br>
+        format:<br>
+        &nbsp;&nbsp;<span class="c-key">html</span>:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;include-after-body:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-val">lang-switch.html</span><br><br>
+        <span class="c-comment"># File structure:</span><br>
+        ├── index.qmd<br>
+        ├── <span class="c-val">index_jp.qmd</span><br>
+        ├── resume.qmd<br>
+        ├── <span class="c-val">resume_jp.qmd</span><br>
+        ├── projects.qmd<br>
+        ├── <span class="c-val">projects_jp.qmd</span><br>
+        └── lang-switch.html
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: The Switcher Code -->
+  <div class="slide" id="slide-6">
+    <div class="s6-header">
+      <div class="s5-label">THE MAGIC FILE</div>
+      <h2 class="s5-title">lang-switch.html — How the Button Works</h2>
+    </div>
+    <div class="two-col">
+      <div class="code-panel">
+        <div class="code-panel-header">
+          <div class="file-dot"></div>
+          lang-switch.html
+        </div>
+        <div class="code-inner">
+<span class="c-gray">// Page mapping — EN ↔ JP</span><br>
+<span class="c-pink">var</span> EN_TO_JP = {<br>
+&nbsp;&nbsp;<span class="c-yellow">'index.html'</span>: <span class="c-green">'index_jp.html'</span>,<br>
+&nbsp;&nbsp;<span class="c-yellow">'resume.html'</span>: <span class="c-green">'resume_jp.html'</span>,<br>
+&nbsp;&nbsp;<span class="c-yellow">'projects.html'</span>: <span class="c-green">'projects_jp.html'</span><br>
+};<br><br>
+<span class="c-gray">// Detect current page language</span><br>
+<span class="c-pink">function</span> <span class="c-blue">detectPage</span>(path) {<br>
+&nbsp;&nbsp;<span class="c-pink">for</span> (enKey <span class="c-pink">in</span> EN_TO_JP) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-pink">if</span> (path.<span class="c-blue">endsWith</span>(enKey))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-pink">return</span> { lang: <span class="c-yellow">'en'</span>, ... };<br>
+&nbsp;&nbsp;}<br>
+}<br><br>
+<span class="c-gray">// Remember user's choice</span><br>
+localStorage.<span class="c-blue">setItem</span>(<span class="c-yellow">'site-lang'</span>, lang);<br><br>
+<span class="c-gray">// Inject dropdown into navbar</span><br>
+ul.innerHTML = <span class="c-yellow">'&lt;li&gt;🇺🇸 EN | 🇯🇵 JP&lt;/li&gt;'</span>;
+        </div>
+      </div>
+      <div>
+        <div class="explained-list">
+          <div class="explained-item">
+            <span class="e-icon">🗺️</span>
+            <div class="e-text">
+              <strong>Page Mapping</strong>
+              <span>A simple JS object connects each English page to its Japanese equivalent. You only add what you've translated.</span>
+            </div>
+          </div>
+          <div class="explained-item">
+            <span class="e-icon">🔍</span>
+            <div class="e-text">
+              <strong>Auto-Detection</strong>
+              <span>The script reads the current URL and figures out which language you're on — no manual setup per page.</span>
+            </div>
+          </div>
+          <div class="explained-item">
+            <span class="e-icon">💾</span>
+            <div class="e-text">
+              <strong>Memory via localStorage</strong>
+              <span>User's language choice is saved in the browser. If they pick JP, every page auto-redirects to the JP version.</span>
+            </div>
+          </div>
+          <div class="explained-item">
+            <span class="e-icon">🧩</span>
+            <div class="e-text">
+              <strong>Injects into Navbar</strong>
+              <span>The dropdown button appears in your top-right nav automatically — no edits to each .qmd file needed.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: Template / CTA -->
+  <div class="slide" id="slide-7">
+    <div class="s7-emoji">🌸</div>
+    <h2 class="s7-title">
+      Your turn —<br>
+      here's the <strong>template</strong>
+    </h2>
+    <p class="s7-desc">
+      Since we all have the same Quarto site structure, I've prepared a ready-to-use 
+      starter so you can add a second language today — no setup from scratch.
+    </p>
+    <div class="template-cards">
+      <div class="t-card">
+        <div class="t-card-icon">📁</div>
+        <div class="t-card-title">Starter files</div>
+        <p class="t-card-desc">Pre-named _jp.qmd versions of every standard page with placeholder content to translate.</p>
+      </div>
+      <div class="t-card">
+        <div class="t-card-icon">⚙️</div>
+        <div class="t-card-title">lang-switch.html</div>
+        <p class="t-card-desc">Drop-in switcher file. Just add one line to your _quarto.yml and it works.</p>
+      </div>
+      <div class="t-card">
+        <div class="t-card-icon">📖</div>
+        <div class="t-card-title">Step-by-step guide</div>
+        <p class="t-card-desc">A short README with exactly what to change, copy, and add for your language.</p>
+      </div>
+    </div>
+    <p class="s7-cta">"Who's going to add a second language to their site this week?"</p>
+    <p class="s7-name">LEIA KAWAMURA &nbsp;·&nbsp; 河村玲采</p>
+  </div>
+
+</div><!-- /deck -->
+
+<script>
+// ── Cherry Blossom Physics ──
+const canvas = document.getElementById('petal-canvas');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+class Petal {
+  constructor() { this.reset(true); }
+  reset(init) {
+    this.x = Math.random() * canvas.width;
+    this.y = init ? Math.random() * canvas.height : -20;
+    this.size = 4 + Math.random() * 7;
+    this.speedY = 0.4 + Math.random() * 0.9;
+    this.speedX = (Math.random() - 0.5) * 0.6;
+    this.rotation = Math.random() * Math.PI * 2;
+    this.rotSpeed = (Math.random() - 0.5) * 0.04;
+    this.opacity = 0.4 + Math.random() * 0.5;
+    this.sway = Math.random() * Math.PI * 2;
+    this.swaySpeed = 0.012 + Math.random() * 0.015;
+    this.swayAmp = 0.4 + Math.random() * 0.8;
+    // Petal shape: slight elongated oval
+    this.rx = this.size;
+    this.ry = this.size * (0.55 + Math.random() * 0.3);
+  }
+  update() {
+    this.sway += this.swaySpeed;
+    this.x += this.speedX + Math.sin(this.sway) * this.swayAmp;
+    this.y += this.speedY;
+    this.rotation += this.rotSpeed;
+    if (this.y > canvas.height + 30) this.reset(false);
+  }
+  draw() {
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.rotation);
+    ctx.globalAlpha = this.opacity;
+    // Soft pink petal
+    ctx.beginPath();
+    ctx.ellipse(0, 0, this.rx, this.ry, 0, 0, Math.PI * 2);
+    const grad = ctx.createRadialGradient(0, -this.ry * 0.2, 0, 0, 0, this.rx);
+    grad.addColorStop(0, '#fde8f0');
+    grad.addColorStop(0.5, '#f5b8d0');
+    grad.addColorStop(1, '#e87fa8');
+    ctx.fillStyle = grad;
+    ctx.fill();
+    // Subtle center line
+    ctx.beginPath();
+    ctx.moveTo(0, -this.ry * 0.8);
+    ctx.lineTo(0, this.ry * 0.8);
+    ctx.strokeStyle = 'rgba(200,100,140,0.25)';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+    ctx.restore();
+  }
+}
+
+const petals = Array.from({ length: 38 }, () => new Petal());
+
+function animatePetals() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  petals.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animatePetals);
+}
+animatePetals();
+
+// ── Slide Logic ──
+const slides = document.querySelectorAll('.slide');
+const dotsContainer = document.getElementById('nav-dots');
+const counter = document.getElementById('counter');
+let current = 0;
+
+// Build dots
+slides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goTo(i);
+  dotsContainer.appendChild(d);
+});
+
+function goTo(n) {
+  slides[current].classList.remove('active');
+  dotsContainer.children[current].classList.remove('active');
+  current = (n + slides.length) % slides.length;
+  slides[current].classList.add('active');
+  dotsContainer.children[current].classList.add('active');
+  counter.textContent = (current + 1) + ' / ' + slides.length;
+}
+
+function changeSlide(dir) { goTo(current + dir); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') changeSlide(1);
+  if (e.key === 'ArrowLeft') changeSlide(-1);
+});
+
+// Touch swipe
+let touchStartX = 0;
+document.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 50) changeSlide(dx < 0 ? 1 : -1);
+});
+</script>
+</body>
+</html>

@@ -200,6 +200,31 @@ main h2, {
   font-weight: 650;
 }
 
+/* Language switcher */
+.lang-switcher-nav .nav-link {
+  color: var(--coffee-dark) !important;
+  font-weight: 650;
+}
+
+.lang-switcher-nav .dropdown-menu {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(92, 58, 33, 0.12);
+  min-width: 140px;
+}
+
+.lang-switcher-nav .dropdown-item {
+  color: var(--coffee-dark);
+  font-weight: 500;
+}
+
+.lang-switcher-nav .dropdown-item:hover,
+.lang-switcher-nav .dropdown-item.active {
+  background: var(--latte);
+  color: var(--coffee-dark);
+}
+
 /* Search icon */
 .aa-SubmitIcon {
   color: var(--coffee-dark);

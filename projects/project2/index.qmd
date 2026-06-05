@@ -49,9 +49,7 @@ Key steps included:
 
 # Sample Query
 
-```{r}
-#| message: false
-
+```{.r}
 library(DBI)
 library(odbc)
 
